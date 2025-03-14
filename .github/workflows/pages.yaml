@@ -1,0 +1,119 @@
+---
+name: Deploy static content to Pages
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Install TeX Gyre Termes font
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y fonts-texgyre
+      - name: Compile Typst document
+        run: |
+          mkdir -p ./dist
+          docker run --rm \
+          -v $GITHUB_WORKSPACE:/work \
+          ghcr.io/typst/typst:v0.13.0 compile /work/main.typ /work/dist/Frank_Mayer_Bachelor_Thesis.pdf
+          docker run --rm \
+          -v $GITHUB_WORKSPACE:/work \
+          ghcr.io/typst/typst:v0.13.0 compile /work/main.typ /work/dist/{0p}.svg --format svg
+      - name: Generate HTML index
+        run: |
+          # Navigate to dist directory
+          cd dist || exit
+
+          # Get list of SVG files sorted by page number
+          SVG_FILES=$(ls -1 *.svg 2>/dev/null | sort -V)
+
+          # Check if SVG files exist
+          if [ -z "$SVG_FILES" ]; then
+              echo "Error: No SVG files found in dist directory."
+              exit 1
+          fi
+
+          # Create HTML file header
+          cat > index.html << EOL
+          <!DOCTYPE html>
+          <html lang="en">
+          <head>
+              <meta charset="UTF-8">
+              <meta name="viewport" content="width=device-width, initial-scale=1.0">
+              <title>Frank Mayer - Bachelor Thesis</title>
+              <style>
+                  :root {
+                      color-scheme: light;
+                  }
+                  body {
+                      font-family: Arial, sans-serif;
+                      max-width: 900px;
+                      margin: 0 auto;
+                      padding: 20px;
+                      line-height: 1.6;
+                  }
+                  .page {
+                      margin-bottom: 40px;
+                      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+                  }
+                  .page object {
+                      width: 100%;
+                      height: auto;
+                      display: block;
+                  }
+                  @media print {
+                      .page {
+                          margin-bottom: 0;
+                          box-shadow: none;
+                          page-break-after: always;
+                      }
+                  }
+              </style>
+          </head>
+          <body>
+              <h1>Frank Mayer - Bachelor Thesis</h1>
+              <p><a href="Frank_Mayer_Bachelor_Thesis.pdf">Go to PDF &#x1F4C4</a></p>
+          EOL
+
+          # Add each SVG file to the HTML
+          for svg in $SVG_FILES; do
+              echo "    <div class=\"page\">" >> index.html
+              echo "        <object data=\"$svg\" type=\"image/svg+xml\" width=\"100%\"></object>" >> index.html
+              echo "    </div>" >> index.html
+          done
+
+          # Close HTML file
+          cat >> index.html << EOL
+          </body>
+          </html>
+          EOL
+
+          echo "HTML index generated successfully."
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: ./dist
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
