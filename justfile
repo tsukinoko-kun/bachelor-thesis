@@ -11,4 +11,4 @@ clean:
     rm -rfd dist || true
 
 watch: build
-    typst watch main.typ --open
+    typst watch main.typ --open Skim
