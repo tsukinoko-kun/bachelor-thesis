@@ -1,7 +1,4 @@
-#set page(
-  margin: (x: 2.5cm, y: 2.5cm),
-  numbering: none,
-)
+#set page(margin: (x: 2.5cm, y: 2.5cm), numbering: none)
 
 #set text(size: 11pt)
 
@@ -16,11 +13,10 @@
 
   #v(0.8cm)
 
-  #text(size: 22pt, weight: "bold")[
-    Development of a Self-Hostable
-    #linebreak()
-    Cloud Gaming Solution
-  ]
+  #text(
+    size: 22pt,
+    weight: "bold",
+  )[Entwicklung und Evaluation einer Plattform für zugängliches Cloud-Gaming zur Bereitstellung von High-End-Spieledemos auf Low-End-Geräten]
 
   #v(1.5cm)
 

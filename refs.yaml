@@ -1,0 +1,212 @@
+---
+steinberg2007:
+  type: Book
+  author: Steinberg, Scott
+  title: Videogame Marketing and PR
+  date: 2007
+  publisher:
+    name: iUniverse
+    location: New York
+  edition: 1
+  serial-number:
+    isbn: "978-0-595-43371-1"
+
+Bartman013_2023:
+  type: Post
+  author: Bartman013
+  title: List of Insomniac Games Budgets and ROI for Miles, Ratchets And
+    Predictions for all their upcoming titles
+  date: 2023-12-19
+  url:
+    value: https://www.reddit.com/r/GamingLeaksAndRumours/comments/18lums9/list_of_insomniac_games_budgets_and_roi_for_miles/
+    date: 2025-06-14
+  parent:
+    type: Thread
+    title: r/GamingLeaksAndRumours
+
+Mirpuri_2023:
+  type: Article
+  author: "Mirpuri, Viren"
+  title: At $300 Million, This Star Wars Game Proved Too Much for Xbox to Fill
+    the Void Left by Starfield’s Delay in 2022, Reveals Leaked Email
+  date: 2023-09-20
+  url:
+    value: https://www.essentiallysports.com/esports-news-at-three-hundred-million-dollar-this-star-wars-jedi-survivor-proved-too-much-for-xbox-to-fill-the-void-left-by-starfields-delay-in-twenty-twenty-two-reveals-leaked-email/
+    date: 2025-06-14
+  parent:
+    type: Periodical
+    title: EssentiallySports
+
+stojnic2019difference:
+  type: Misc
+  title: "The Difference in Differentness: Low-Risk, High-Budget versus
+    Innovation and Creativity: An exploratory view from a game-designer’s
+    perspective"
+  author: "Stojnić, Slavko"
+  date: 2019
+
+starwarsjedisurvivor:
+  type: Web
+  title: "STAR WARS Jedi: Survivor"
+  url:
+    value: https://store.steampowered.com/app/1774580/STAR_WARS_Jedi_Survivor/
+    date: 2025-05-16
+  organization: Steam
+
+assassinscreedshadows:
+  type: Web
+  title: "Assassin’s Creed Shadows"
+  url:
+    value: https://store.steampowered.com/app/3159330/Assassins_Creed_Shadows/
+    date: 2025-05-16
+  organization: Steam
+
+theelderscrollsoblivionremastered:
+  type: Web
+  title: "The Elder Scrolls IV: Oblivion Remastered"
+  url:
+    value: https://store.steampowered.com/app/2623190/The_Elder_Scrolls_IV_Oblivion_Remastered/
+    date: 2025-05-16
+  organization: Steam
+
+blackmythwukong:
+  type: Web
+  title: "Black Myth: Wukong"
+  url:
+    value: https://store.steampowered.com/app/2358720/Black_Myth_Wukong/
+    date: 2025-05-16
+  organization: Steam
+
+godofwarragnark:
+  type: Web
+  title: "God of War Ragnarök"
+  url:
+    value: https://store.steampowered.com/app/2322010/God_of_War_Ragnark/
+    date: 2025-05-16
+  organization: Steam
+
+finalfantasyviirebirth:
+  type: Web
+  title: FINAL FANTASY VII REBIRTH
+  url:
+    value: https://store.steampowered.com/app/2909400/FINAL_FANTASY_VII_REBIRTH/
+    date: 2025-05-16
+  organization: Steam
+
+thelastofuspart2remastered:
+  type: Web
+  title: "The Last of Us Part II Remastered"
+  url:
+    value: https://store.steampowered.com/app/2531310/The_Last_of_Us_Part_II_Remastered/
+    date: 2025-05-16
+  organization: Steam
+
+dragonagetheveilguard:
+  type: Web
+  title: "Dragon Age: The Veilguard"
+  url:
+    value: https://store.steampowered.com/app/1845910/Dragon_Age_The_Veilguard/
+    date: 2025-05-16
+  organization: Steam
+
+cyberpunk2077:
+  type: Web
+  title: Cyberpunk 2077
+  url:
+    value: https://store.steampowered.com/app/1091500/Cyberpunk_2077/
+    date: 2025-05-16
+  organization: Steam
+
+thelastofuspart2remasteredbenchmark:
+  type: Video
+  author: Republic Benchmarks
+  title: "The Last of Us Part II Remastered | Gameplay Benchmark | I5-11400 +
+    RTX 3060 | 1080p | 1440p"
+  date: 2025-04-03
+  url:
+    value: https://youtu.be/Kz3JjY0p6-4
+    date: 2025-05-16
+  publisher: YouTube
+
+stadia-faq-2023:
+  type: Web
+  title: Stadia Announcement FAQ
+  author: Google Support
+  date: 2023-03-08
+  url:
+    value: https://support.google.com/stadia/answer/12790109
+    date: 2025-06-15
+  publisher: Google
+
+dlss4:
+  type: Report
+  title: "DLSS 4: Transforming Real-Time Graphics with AI"
+  author: NVIDIA Corporation
+  genre: Technical Report
+  date: 2025
+  url:
+    value: https://research.nvidia.com/labs/adlr/DLSS4/
+    date: 2025-06-15
+
+alcorn-2024-amd-strategy:
+  type: Article
+  title: "AMD deprioritizing flagship gaming GPUs: Jack Huynh talks new strategy against Nvidia in gaming market"
+  author: "Alcorn, Paul"
+  date: 2024-09-08
+  url:
+    value: https://www.tomshardware.com/pc-components/gpus/amd-deprioritizing-flagship-gaming-gpus-jack-hyunh-talks-new-strategy-for-gaming-market
+    date: 2025-06-15
+  parent:
+    type: Blog
+    title: Tom's Hardware
+
+jaykihn0-2025-x-post:
+  type: Post
+  title: Died in Q3 of last year.
+  author: jaykihn0
+  date: 2025-03-27
+  url:
+    value: https://x.com/jaykihn0/status/1905055296839700601
+    date: 2025-06-15
+
+steamdb-2025-stellar-blade-charts:
+  type: Web
+  title: Stellar Blade Demo - Steam Charts
+  author: SteamDB
+  date: 2025-06-16
+  url:
+    value: https://steamdb.info/app/3564860/charts/
+    date: 2025-06-16
+  note: Daten für den Zeitraum vom 30. Mai 2025 bis 16. Juni 2025.
+
+aws-ec2-g5-instances:
+  type: Web
+  title: "Amazon EC2 G5 Instances"
+  author: "Amazon Web Services"
+  url:
+    value: https://aws.amazon.com/ec2/instance-types/g5/
+    date: 2025-06-16
+
+vantage-g5-2xlarge:
+  type: Web
+  title: "g5.2xlarge EC2 Instance - Vantage"
+  author: "Vantage"
+  url:
+    value: https://instances.vantage.sh/aws/ec2/g5.2xlarge?region=eu-central-1&platform=linux&duration=hourly
+    date: 2025-06-16
+  note: "Details und Preisangaben für die Region eu-central-1, Linux-Plattform und stündliche Abrechnung."
+
+choy2012brewing:
+  type: Article
+  title: "The brewing storm in cloud gaming: A measurement study on cloud to end-user latency"
+  author:
+    - "Choy, Sharon"
+    - "Wong, Bernard"
+    - "Simon, Gwendal"
+    - "Rosenberg, Catherine"
+  date: 2012
+  page-range: 1-6
+  parent:
+    type: Proceedings
+    title: "2012 11th Annual Workshop on Network and Systems Support for Games (NetGames)"
+    organization: IEEE
