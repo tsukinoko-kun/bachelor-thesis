@@ -51,7 +51,6 @@
     text(weight: "medium")[Matrikelnummer:], text()[215965],
     text(weight: "medium")[Betreuung:], text()[Prof. Dr. Thomas Fankhauser],
     [], text()[Prof. Dr. rer. nat. Nicole Ondrusch],
-    text(weight: "medium")[Abgabedatum:],
-    text()[#datetime.today().display("[day].[month].[year]")],
+    text(weight: "medium")[Abgabedatum:], text()[22.08.2025],
   )
 ]
