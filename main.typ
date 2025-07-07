@@ -142,9 +142,11 @@
 #emph(text(weight: "bold")[Abstract -])
 #text(weight: "bold")[#include "src/abstract.typ"]
 
-#include "src/000_naming.typ"
-#include "src/001_target_group.typ"
-#include "src/002_core_challenges.typ"
-#include "src/003_base_technologies.typ"
+#include "./src/000_naming.typ"
+#include "./src/001_questions.typ"
+#include "./src/002_target_group.typ"
+#include "./src/003_core_challenges.typ"
+#include "./src/004_base_technologies.typ"
+#include "./src/005_architecture.typ"
 
 #bibliography("refs.yaml", title: [Verweise])

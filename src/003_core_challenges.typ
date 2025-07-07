@@ -16,7 +16,9 @@ Aktuelle AAA-Titel weisen eine beträchtliche Größe von etwa 100 bis 200 GB pr
 - Dragon Age: The Veilguard (100 GB) @dragonagetheveilguard
 - Cyberpunk 2077 (70 GB) @cyberpunk2077
 
-Dies führt zu einer nicht unerheblichen Zeit für das einfache Kopieren der Spieldateien. Beispielsweise ergibt sich bei einer Bandbreite von $1 frac("Gb", "s")$ und Spieldaten von $100 "GB"$ eine Kopierzeit von $T("copy") = frac(100 "GB", 1 frac("Gb", s)) = 800s approx 13.3 "Minuten"$.
+Dies führt zu einer nicht unerheblichen Zeit für das einfache Kopieren der Spieldateien. Beispielsweise ergibt sich bei einer Bandbreite von $1 frac("Gb", "s")$ und Spieldaten von $100 "GB"$ eine Kopierzeit von $T("copy") = frac(100 "GB", 1 frac("Gb", "s")) = 800s approx 13.3 "Minuten"$.
+
+Wenn ein Spieler in Deutschland ein Spiel von Steam herunterlädt, geschieht das durchschnittlich mit $79.1 frac("Mb", "s")$ @steam-download-stats, was bei einer Spielgröße von $100 "GB"$ eine Kopierzeit von $T("copy") = frac(100 "GB", 79.1 frac("Mb", "s")) approx 10113.8s approx 2.8 "Stunden"$ entspricht.
 
 Bei kleineren Spielen fällt dieses Problem weg, sie werden daher für dieses Problem nicht weiter behandelt.
 
@@ -24,9 +26,9 @@ Bei kleineren Spielen fällt dieses Problem weg, sie werden daher für dieses Pr
 
 Jede Spiel-Session erfordert eine moderne GPU, beispielsweise eine RTX 6000 oder A10G, um AAA-Titel mit hohen Einstellungen flüssig darstellen zu können.
 
-Eine empfohlene Grafikkarte (für Endnutzer) ist beispielsweise die NVIDIA GeForce RTX 3060 @thelastofuspart2remastered. Diese Grafikkarte erreicht bei "The Last of Us Part II Remastered" mit KI-Features wie Frame Generation etwa 100 FPS @thelastofuspart2remasteredbenchmark, was ausreichend ist.
+Eine empfohlene Grafikkarte (für Endnutzer) ist beispielsweise die NVIDIA GeForce RTX 3060 @thelastofuspart2remastered. Diese Grafikkarte erreicht bei "The Last of Us Part II Remastered" mit KI-Features wie Frame Generation @dlss4 etwa 100 FPS @thelastofuspart2remasteredbenchmark, was ausreichend ist.
 
-Nvidia Hardware ist bei AAA-Spielen zu bevorzugen, da die Konkurrenz AMD und Intel nicht am High-End Markt interessiert ist. @alcorn-2024-amd-strategy @jaykihn0-2025-x-post
+Nvidia Hardware ist bei AAA-Spielen zu bevorzugen, da die Konkurrenz (AMD und Intel) in absehbarer Zukunft nicht am High-End-Markt interessiert ist. @alcorn-2024-amd-strategy @jaykihn0-2025-x-post
 
 Nvidia bietet aktuell folgende Technologien an, die für gute Performance bei grafisch anspruchsvollen Spielen sorgen:
 
@@ -54,7 +56,7 @@ Eine geringe Latenz ist entscheidend für ein reaktionsschnelles Spielerlebnis. 
 
 Da es das Ziel ist, Demos über Cloud Gaming anzubieten, werden die Konsumenten kein Geld dafür bezahlen. Für die Betreiber muss es also so günstig wie möglich sein, damit sie Gewinn erwirtschaften.
 
-Ein Ziel von \$1 - \$5 pro Stunde pro Spieler wird für die Machbarkeitsanalyse frei gewählt um eine grobe Einschätzung zu bekommen. Die Betreiber müssten selbst kalkulieren wie viele Spieler sie an den Demos haben was das komplette Spiel kostet und wie viele Spieler sich von der Demo überzeugen lassen, um das volle Spiel zu kaufen.
+Ein Ziel von \$1 pro Stunde pro Spieler wird für die Machbarkeitsanalyse frei gewählt um eine grobe Einschätzung zu bekommen. Die Betreiber müssten selbst kalkulieren wie viele Spieler sie an den Demos haben was das komplette Spiel kostet und wie viele Spieler sich von der Demo überzeugen lassen, um das volle Spiel zu kaufen.
 
 == Skalierbarkeit
 
@@ -65,12 +67,6 @@ Schaut man sich eine erfolgreiche Demo, wie die von Stellar Blade (89,18% positi
   caption: [Stellar Blade Demo - Gleichzeitig aktive Spieler auf Steam @steamdb-2025-stellar-blade-charts],
 )
 
-Die Skalierung auf 25000 gleichzeitige Sitzungen erfordert eine ausgeklügelte Orchestrierung, Autoscaling-Mechanismen und die Entscheidung zwischen gepoolten und sitzungsgebundenen Ressourcen.
-
-== Persistenz
-
-Spielstände sollten auch nach Beendigung einer Instanz erhalten bleiben.
-
 == Sicherheit und DRM
 
-Es muss verhindert werden, dass Benutzer die Spieldateien extrahieren können.
+Es muss verhindert werden, dass Benutzer die Spieldateien extrahieren und verwenden können.

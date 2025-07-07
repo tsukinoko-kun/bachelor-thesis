@@ -1,6 +1,10 @@
 = Zielgruppe
 
-Es wurde eine Umfrage an Videospiel-Entusiasten durchgeführt. An der Umfrage haben hauptsächlich Software-Engineering-Studenten teilgenommen, aber auch Personen aus anderen Berufs- und Altersgruppen. Insgesamt haben 35 Personen teilgenommen, wovon 32 aus Deutschland und drei aus den USA waren. Den teilnehmenden wurde kein Anreiz gegeben teilzunehmen und die Befragung fand über das online-Tool Blocksurvey statt.
+Es wurde eine Umfrage an Videospiel-Entusiasten durchgeführt.
+
+Den Befragten wurde die Idee vorgestellt, dass sie Demos von Videospielen in Zukunft mit Cloud-Gaming spielen können, anstatt auf der eigenen Hardware. Wie bisher auch, kostet das nichts. Der Publisher oder Entwickler stellt die Plattform dafür bereit.
+
+An der Umfrage haben hauptsächlich Software-Engineering-Studenten teilgenommen, aber auch Personen aus anderen Berufs- und Altersgruppen. Insgesamt haben 35 Personen teilgenommen, wovon 32 aus Deutschland und drei aus den USA waren. Den teilnehmenden wurde kein Anreiz gegeben teilzunehmen und die Befragung fand über das online-Tool Blocksurvey statt.
 
 80% der befragten Spieler gaben an, dass sie Videospiele auf einem Desktop PC spielen.
 
@@ -17,6 +21,8 @@ Es wurde eine Umfrage an Videospiel-Entusiasten durchgeführt. An der Umfrage ha
 )
 
 Die Mehrheit der Befragten gab an, sich für AAA-Spiele zu interessieren.
+
+Diese sind, lauf den Steam-Seiten, auch die Spiele, die die höchsten Hardware-Anforderungen haben (CPU- und GPU-Leistung, sowie Festplattenspeicher). @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
 
 #figure(
   image("img/interest_aaa.png"),
@@ -46,5 +52,5 @@ Die Zielgruppe, die eine Untermenge aller Spieler darstellt, lässt sich aufgrun
 + Es wurden bereits Cloud-Gaming-Lösungen verwendet.
 + Es besteht Interesse daran, die Spiele als Demo in der Cloud zu spielen.
 
-Ziel dieser Bachelor-Thesis ist es, ein Konzept für eine _self-hostable_ Cloud Gaming-Lösung zu entwickeln.
-Diese soll es Publishern und self-publishing-Studios ermöglichen, Demos ihrer Spiele unkompliziert anzubieten. Im Rahmen der Arbeit werden zunächst der aktuelle Stand der Technik und bestehende Lösungsansätze analysiert. Aufbauend darauf wird ein Konzept erarbeitet, das insbesondere auf die Herausforderungen im Bereich der Demo-Bereitstellung und des Schutzes geistigen Eigentums eingeht. Es werden existierende Lösungen für Teilprobleme verwendet, wenn solche existieren und auf den Anwendungsfall passen.
+Ziel dieser Arbeit ist es, ein Konzept für eine Cloud-Gaming-Lösung zu entwickeln.
+Diese soll es Publishern und self-publishing-Entwicklern ermöglichen, Demos ihrer Spiele unkompliziert anzubieten. Im Rahmen der Arbeit werden zunächst der aktuelle Stand der Technik und bestehende Lösungsansätze analysiert. Aufbauend darauf wird ein Konzept erarbeitet, das insbesondere auf die Herausforderungen im Bereich der Demo-Bereitstellung und des Schutzes geistigen Eigentums eingeht. Es werden existierende Lösungen für Teilprobleme verwendet, wenn solche existieren und auf den Anwendungsfall passen.

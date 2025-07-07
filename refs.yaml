@@ -210,3 +210,12 @@ choy2012brewing:
     type: Proceedings
     title: "2012 11th Annual Workshop on Network and Systems Support for Games (NetGames)"
     organization: IEEE
+
+steam-download-stats:
+  type: Web
+  title: Steam-Downloadstatistiken
+  url:
+    value: https://store.steampowered.com/stats/content/?l=german
+    date: 2025-07-07
+  language: de
+  organization: Valve Corporation
