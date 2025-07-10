@@ -219,3 +219,22 @@ steam-download-stats:
     date: 2025-07-07
   language: de
   organization: Valve Corporation
+
+abiodundesign:
+  type: Article
+  title: Design and Implementation of a Scalable Cloud-Based File Sharing System Using Amazon Elastic Compute (EC2) and Amazon Simple Storage (S3)
+  author:
+    - Abiodun, Olowookere Sunday
+    - Olanrewaju, Kilani Sikiru
+  page-range: 406
+  date: 2025-06
+  parent:
+    type: Periodical
+    title: International Journal of Advance Research Publication and Reviews
+    volume: 2
+    issue: 6
+    serial-number:
+      issn: "3049-0103"
+    url:
+      value: https://www.ijrpr.com
+      date: 2025-07-10

@@ -3,6 +3,8 @@
 // Start the rest of your document on a new page
 #pagebreak()
 
+#counter(page).update(1)
+
 #let paper-size = "a4"
 
 #set text(font: "TeX Gyre Termes", size: 10pt, spacing: .35em)
@@ -49,6 +51,8 @@
 #set page(
   columns: 2,
   paper: paper-size,
+  numbering: "1",
+  number-align: center,
   // The margins depend on the paper size.
   margin: if paper-size == "a4" {
     (x: 41.5pt, top: 80.51pt, bottom: 89.51pt)
