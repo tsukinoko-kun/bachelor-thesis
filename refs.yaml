@@ -238,3 +238,11 @@ abiodundesign:
     url:
       value: https://www.ijrpr.com
       date: 2025-07-10
+
+aws-ec2-quotas:
+  type: Web
+  title: EC2 Instance Quotas
+  organization: Amazon Web Services
+  url:
+    value: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
+    date: 2025-07-10
