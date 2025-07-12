@@ -246,3 +246,16 @@ aws-ec2-quotas:
   url:
     value: https://docs.aws.amazon.com/ec2/latest/instancetypes/ec2-instance-quotas.html
     date: 2025-07-10
+
+fei1998measurements:
+  type: Article
+  title: Measurements on delay and hop-count of the internet
+  author:
+    - Fei, Aiguo
+    - Pei, Guangyu
+    - Liu, Roy
+    - Zhang, Lixia
+  date: 1998
+  parent:
+    type: Proceedings
+    title: IEEE GLOBECOM’98-Internet Mini-Conference
