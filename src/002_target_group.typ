@@ -1,56 +1,51 @@
 = Zielgruppe
 
-Es wurde eine Umfrage an Videospiel-Entusiasten durchgeführt.
+Zur Definition der Zielgruppe wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von Videospielen zukünftig kostenfrei über eine vom Publisher oder Entwickler bereitgestellte Cloud-Gaming-Plattform zu spielen, anstatt sie auf der eigenen Hardware installieren zu müssen.
 
-Den Befragten wurde die Idee vorgestellt, dass sie Demos von Videospielen in Zukunft mit Cloud-Gaming spielen können, anstatt auf der eigenen Hardware. Wie bisher auch, kostet das nichts. Der Publisher oder Entwickler stellt die Plattform dafür bereit.
+Die Stichprobe umfasste 35 Personen, davon 32 aus Deutschland und drei aus den USA. Die Teilnehmerschaft setzte sich überwiegend aus Studierenden des Software-Engineerings sowie Personen anderer Berufs- und Altersgruppen zusammen. Die Teilnahme erfolgte freiwillig und ohne Anreize über das Online-Tool Blocksurvey.
 
-An der Umfrage haben hauptsächlich Software-Engineering-Studenten teilgenommen, aber auch Personen aus anderen Berufs- und Altersgruppen. Insgesamt haben 35 Personen teilgenommen, wovon 32 aus Deutschland und drei aus den USA waren. Den teilnehmenden wurde kein Anreiz gegeben teilzunehmen und die Befragung fand über das online-Tool Blocksurvey statt.
-
-80% der befragten Spieler gaben an, dass sie Videospiele auf einem Desktop PC spielen.
+Die Ergebnisse zeigen, dass 80% der Befragten vorwiegend einen Desktop-PC als Spielplattform nutzen.
 
 #figure(
   image("img/survey_devices.png"),
   caption: "Umfrage - Auf welchem Gerät spielst du Videospiele?",
 )
 
-94.3% gaben an, dass sie Videospiele spielen, die 60 GB oder großer sind. Bei 37.1% der befragten, sind die Spiele sogar über 100GB groß.
+Hinsichtlich der Installationsgröße gaben 94.3% an, Spiele mit einem Speicherbedarf von 60 GB oder mehr zu nutzen. Bei 37.1% der Befragten überschreitet dieser sogar 100 GB.
 
 #figure(
   image("img/survey_size.png"),
   caption: "Umfrage - Wie groß sind die Spiele, die du spielst? (in GB)",
 )
 
-Die Mehrheit der Befragten gab an, sich für AAA-Spiele zu interessieren.
-
-Diese sind, lauf den Steam-Seiten, auch die Spiele, die die höchsten Hardware-Anforderungen haben (CPU- und GPU-Leistung, sowie Festplattenspeicher). @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
+Eine deutliche Mehrheit bekundete zudem Interesse an sogenannten AAA-Spielen. Laut den Angaben auf der Vertriebsplattform Steam stellen diese Titel in der Regel die höchsten Anforderungen an die Hardware (CPU, GPU) und den Festplattenspeicher. @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
 
 #figure(
   image("img/interest_aaa.png"),
   caption: "Umfrage - Interessierst du dich für AAA Games?",
 )
 
-Die meisten der Befragten haben bereits Cloud-Gaming-Lösungen verwendet. "Andere" war hier Google Stadia, dass 18.01.2023 abgeschaltet wurde. @stadia-faq-2023
+Die Umfrage ergab weiterhin, dass die Mehrheit der Befragten bereits Erfahrungen mit Cloud-Gaming-Diensten gesammelt hat. Die Antwortoption "Andere" bezog sich dabei vornehmlich auf den Dienst Google Stadia, welcher zum 18.01.2023 eingestellt wurde. @stadia-faq-2023
 
 #figure(
   image("img/survey_cloudgamingplattform.png"),
   caption: "Umfrage - Welchen Cloud Gaming Anbieter hast du bereits verwendet?",
 )
 
-Der wichtigste Punkt der Umfrage, ob die Befragten Spiele-Demos über Cloud Gaming spielen würden, anstatt sie auf den eigenen Computer herunterzuladen, wurde zu 68,6% mit Ja beantwortet. 11,4% gaben an, dass es darauf ankommt, wie viel Aufwand sie als Spieler dafür betreiben müssen (Registrierung, Warteschlange), es gab auch Bedenken über die Latenz.
+Die von den Teilnehmern angegebene Internetverbindung weist eine durchschnittliche Download-Geschwindigkeit von $325.4 frac("Mb", "s")$ (Median: $105 frac("Mb", "s")$) und eine durchschnittliche Latenz (Ping) von 28.88 ms (Median: 16 ms) auf.
+
+Die zentrale Fragestellung der Umfrage bezog sich auf die Bereitschaft, Spieledemos via Cloud-Gaming zu nutzen. Eine deutliche Mehrheit von 68.6% befürwortete diesen Ansatz gegenüber dem lokalen Download. Weitere 11.4% zeigten sich unter Vorbehalt zustimmend, wobei die Akzeptanz von Faktoren wie dem Nutzungsaufwand (z.B. Registrierung, Wartezeiten) und der technischen Qualität, insbesondere der Latenz, abhängt.
 
 #figure(
   image("img/survey_clouddemo.png"),
   caption: "Umfrage - Würdest du Demos über Cloud Gaming spielen, bevor du ein Spiel kaufst?",
 )
 
-Die Befragten gaben eine durchschnittliche Downloadgeschwindigeit von $325.4 frac("Mb", "s")$ an, der Median beträgt $105 frac("Mb", "s")$. Beim Ping wurde durchschnittlich 28,88 ms angegeben, der Median beträgt 16 ms.
+Basierend auf den Umfrageergebnissen lässt sich die Zielgruppe, eine Teilmenge der Gesamtspielerschaft, wie folgt charakterisieren:
 
-Die Zielgruppe, die eine Untermenge aller Spieler darstellt, lässt sich aufgrund der Umfrage so zusammenfassen:
++ Überwiegende Nutzung von Desktop-PCs als primäre Spielplattform.
++ Breites Interesse an Spielen unterschiedlicher Größe, mit einem explizit hohen Interesse an ressourcenintensiven AAA-Titeln.
++ Vorhandene Erfahrungen mit Cloud-Gaming-Diensten.
++ Hohe Bereitschaft, Spieledemos über Cloud-Gaming anstelle lokaler Installationen zu nutzen.
 
-+ Es handelt sich überwiegend um Spieler am Desktop.
-+ Interesse reicht von kleinen bis großen Spielen. Explizites Interesse an AAA-Spielen ist groß.
-+ Es wurden bereits Cloud-Gaming-Lösungen verwendet.
-+ Es besteht Interesse daran, die Spiele als Demo in der Cloud zu spielen.
-
-Ziel dieser Arbeit ist es, ein Konzept für eine Cloud-Gaming-Lösung zu entwickeln.
-Diese soll es Publishern und self-publishing-Entwicklern ermöglichen, Demos ihrer Spiele unkompliziert anzubieten. Im Rahmen der Arbeit werden zunächst der aktuelle Stand der Technik und bestehende Lösungsansätze analysiert. Aufbauend darauf wird ein Konzept erarbeitet, das insbesondere auf die Herausforderungen im Bereich der Demo-Bereitstellung und des Schutzes geistigen Eigentums eingeht. Es werden existierende Lösungen für Teilprobleme verwendet, wenn solche existieren und auf den Anwendungsfall passen.
+Das Ziel der vorliegenden Arbeit ist die Konzeption einer Cloud-Gaming-Lösung, die es Publishern sowie Self-Publishing-Entwicklern ermöglicht, Demos ihrer Spiele unkompliziert bereitzustellen. Hierfür wird zunächst der aktuelle Stand der Technik sowie bestehende Lösungsansätze analysiert. Aufbauend auf dieser Analyse wird ein Konzept entwickelt, das spezifische Herausforderungen wie die effiziente Bereitstellung von Demos und den Schutz des geistigen Eigentums adressiert. Dabei wird auf existierende Teillösungen zurückgegriffen, sofern diese für den Anwendungsfall geeignet sind.

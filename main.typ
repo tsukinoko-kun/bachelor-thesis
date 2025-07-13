@@ -73,9 +73,12 @@
 #show ref: it => {
   if it.element != none and it.element.func() == math.equation {
     // Override equation references.
-    link(it.element.location(), numbering(it.element.numbering, ..counter(
-      math.equation,
-    ).at(it.element.location())))
+    link(it.element.location(), numbering(
+      it.element.numbering,
+      ..counter(
+        math.equation,
+      ).at(it.element.location()),
+    ))
   } else {
     // Other references as usual.
     it
@@ -108,6 +111,11 @@
           [Acknowledgement],
           [Acknowledgments],
           [Acknowledgements],
+          [Danksagung],
+          [Danksagungen],
+          [Declaration of Authenticity],
+          [Declaration of Oath],
+          [Eidesstattliche Erklärung],
         )
     )
     set align(center)
@@ -141,7 +149,7 @@
 // Style bibliography.
 #show std.bibliography: set text(8pt)
 #show std.bibliography: set block(spacing: 0.5em)
-#set std.bibliography(title: text(10pt)[References], style: "ieee")
+#set std.bibliography(title: text(10pt)[Verweise], style: "ieee")
 
 #emph(text(weight: "bold")[Abstract -])
 #text(weight: "bold")[#include "src/abstract.typ"]
@@ -152,5 +160,8 @@
 #include "./src/003_core_challenges.typ"
 #include "./src/004_base_technologies.typ"
 #include "./src/005_architecture.typ"
-
-#bibliography("refs.yaml", title: [Verweise])
+#include "./src/006_implementing_stream_service.typ"
+#include "./src/007_proof_of_concept.typ"
+#bibliography("refs.yaml")
+#include "src/danksagung.typ"
+#include "src/eidesstattliche-erklaerung.typ"

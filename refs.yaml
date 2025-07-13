@@ -259,3 +259,115 @@ fei1998measurements:
   parent:
     type: Proceedings
     title: IEEE GLOBECOM’98-Internet Mini-Conference
+
+statista-cloud-market:
+  type: Web
+  title: Marktanteile der führenden Unternehmen am Umsatz im Bereich Cloud
+    Computing weltweit im 1. Quartal 2025
+  author: Statista Research Department
+  date: 2025-06-17
+  url:
+    value: "https://de.statista.com/statistik/daten/studie/150979/umfrage/marktanteile-der-fuehrenden-unternehmen-im-bereich-cloud-computing/"
+    date: 2025-07-13
+  note:
+    "Erhebungszeitraum: 1. Quartal 2025; Hinweise und Anmerkungen: Cloud-Infrastruktur-Services
+    (IaaS/PaaS)"
+  language: de
+
+webrtc-tech:
+  type: Article
+  title: WebRTC technology overview and signaling solution design and implementation
+  author: ["Sredojev, Branislav", "Samardzija, Dragan", "Posarac, Dragan"]
+  date: 2015
+  page-range: 1006-1009
+  serial-number:
+    doi: "10.1109/MIPRO.2015.7160422"
+  parent:
+    type: Proceedings
+    title: 2015 38th International Convention on Information and Communication Technology, Electronics and Microelectronics (MIPRO)
+
+rao2024optimizing:
+  type: Article
+  title: Optimizing Latency in Secure Reliable Transport (SRT) Protocol through Machine Learning for Video Streaming Applications
+  author:
+    - Rao, Rahul V
+    - N, Sushmita B
+    - Nayak, Manjunath S
+    - S, Akilesh N
+    - S, Ramya
+    - Baliga, Shwetha
+    - Karjee, Jyotirmoy
+  date: 2024
+  page-range: 1-6
+  serial-number:
+    doi: "10.1109/CONECCT62155.2024.10677250"
+  parent:
+    type: Proceedings
+    title: 2024 IEEE International Conference on Electronics, Computing and Communication Technologies (CONECCT)
+
+gurel2023media:
+  type: Article
+  title: "Media over QUIC: Initial Testing, Findings and Results"
+  author:
+    - Gurel, Zafer
+    - Erkilic Civelek, Tugce
+    - Bodur, Atakan
+    - Bilgin, Senem
+    - Yeniceri, Deniz
+    - Begen, Ali C.
+  date: 2023
+  serial-number:
+    isbn: "9798400701481"
+    doi: "10.1145/3587819.3593937"
+  url: https://doi.org/10.1145/3587819.3593937
+  abstract: With its advantages over TCP, QUIC created a new field for developing media-aware low-latency delivery solutions. The problem space is being examined by the new Media over QUIC (moq) working group in the IETF. In this paper, we study one of the initial proposals in detail, do a gap analysis and create an open-source testbed by introducing new essential features.
+  page-range: 301-306
+  page-total: 6
+  parent:
+    type: Proceedings
+    title: 14th ACM Multimedia Systems Conference
+    location: Vancouver, BC, Canada
+    publisher:
+      name: Association for Computing Machinery
+      location: New York, NY, USA
+
+mejias2025streaming:
+  type: Misc
+  title: "Streaming Remote rendering services: Comparison of QUIC-based and WebRTC Protocols"
+  author:
+    - Mejías, Daniel
+    - Yeregui, Inhar
+    - Martín, Ángel
+    - Viola, Roberto
+    - Angueira, Pablo
+    - Montalbán, Jon
+  date: 2025
+  serial-number:
+    arxiv: 2505.22132
+  url:
+    value: https://arxiv.org/abs/2505.22132
+    date: 2025-07-13
+
+caniuse-mpeg4:
+  type: Web
+  title: MPEG-4/H.264 video format | Can I use... Support tables for HTML5, CSS3, etc
+  url:
+    value: https://caniuse.com/mpeg4
+    date: 2025-07-13
+  date: 2025-03-23
+
+caniuse-av1:
+  type: Web
+  title: AV1 video format | Can I use... Support tables for HTML5, CSS3, etc
+  url:
+    value: https://caniuse.com/av1
+    date: 2025-07-13
+  date: 2025-03-23
+
+caniuse-webm:
+  type: Web
+  title: WebM video format | Can I use... Support tables for HTML5, CSS3, etc
+  url:
+    value: https://caniuse.com/webm
+    date: 2025-07-13
+  date: 2025-03-23

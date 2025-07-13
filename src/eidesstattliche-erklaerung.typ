@@ -1,0 +1,3 @@
+= Eidesstattliche Erklärung
+
+Ich versichere hiermit, dass ich die vorliegende Bachelor-Arbeit selbstständig und ohne unzulässige Hilfsmittel verfasst habe und alle verwendeten Quellen gekennzeichnet wurden. Bei der sprachlichen Formulierung und Optimierung einzelner Abschnitte kam das Large Language Model 'Gemini 2.5 Pro' von Google unterstützend zum Einsatz. Es diente ausschließlich der Verbesserung der Ausdrucksweise und Klarheit der Darstellung. Der gesamte Inhalt, die wissenschaftlichen Aussagen und die Forschungsergebnisse dieser Arbeit wurden eigenständig von mir entwickelt und verantwortet und sind in keiner Weise durch die Nutzung des Sprachmodells beeinflusst worden.
