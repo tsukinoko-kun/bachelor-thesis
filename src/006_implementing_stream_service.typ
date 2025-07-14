@@ -88,8 +88,8 @@ MoQ ist noch ein IETF-Draft, also kein final verabschiedeter Standard.
 Die Spezifikationen können sich noch ändern.
 Das Ökosystem an Tools, fertigen Bibliotheken und Dokumentation ist klein.
 
-MoQ kann in der Zukunft zum perfekten Protokoll für Cloud-Gaming werden, aktuell ist es aber aufgrund des Draft-Statuses noch experimentell.
-Es gibt keine native MoQ-API im Browser, daher müsste diese über WebAssembly implementiert werden.
+RoQ (RTP over QUIC) ist nich umsetzbar, da QUIC noch nicht weit verbreitet ist.
+Nicht einmal der aktuelle Curl-Release unterstützt HTTP3.
 
-RoQ (RTP over QUIC) ist realistischer.
-Das Protokoll ist etablierter als MoQ.
+MoQ kann in der Zukunft zum perfekten Protokoll für Cloud-Gaming werden, aktuell ist es aber aufgrund des Draft-Statuses noch experimentell.
+Zudem kommen hier die selben Probleme wie mit RoQ zum Ausdruck.
