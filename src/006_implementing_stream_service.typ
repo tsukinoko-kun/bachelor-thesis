@@ -84,6 +84,9 @@ SRT bietet eine zu hohe Latenz für Cloud-Gaming-Szenarien.
 
 WebRTC ist sehr komplex aber eine gute und weit verbreitete Lösung.
 
+QUIC ist vergleichsweise neu und die darauf basierenden Protokolle sind viel effizienter als WebRTC.
+Ein großer Nachteil ist, dass für QUIC ein SSL-Zertifikat benötigt wird.
+
 MoQ ist noch ein IETF-Draft, also kein final verabschiedeter Standard.
 Die Spezifikationen können sich noch ändern.
 Das Ökosystem an Tools, fertigen Bibliotheken und Dokumentation ist klein.

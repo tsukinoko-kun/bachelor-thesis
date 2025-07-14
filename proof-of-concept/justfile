@@ -1,0 +1,5 @@
+frontend:
+    cd frontend && pnpm install && pnpm run dev
+
+backend:
+    cd backend && go mod tidy && air
