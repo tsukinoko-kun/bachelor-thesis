@@ -371,3 +371,117 @@ caniuse-webm:
     value: https://caniuse.com/webm
     date: 2025-07-13
   date: 2025-03-23
+
+di2021network:
+  type: Article
+  title: "A network analysis on cloud gaming: Stadia, geforce now and psnow"
+  author:
+    - Di Domenico, Andrea
+    - Perna, Gianluca
+    - Trevisan, Martino
+    - Vassio, Luca
+    - Giordano, Danilo
+  page-range: 7
+  date: 2021
+  parent:
+    type: Periodical
+    title: Network
+    volume: 1
+    issue: 3
+    publisher: MDPI
+
+streaming-protocols:
+  type: Web
+  title: "Streaming Protocols for Live Broadcasting: Everything You Need to Know [2025 Update]"
+  author: ["Whitehead, Jon"]
+  date: 2025-07-01
+  url:
+    value: https://www.dacast.com/blog/streaming-protocols/
+    date: 2025-07-17
+
+shadow-streaming:
+  type: Web
+  title: Streaming Preferences Explained (TCP & UDP)
+  url:
+    value: https://support.shadow.tech/hc/en-us/articles/32731845984145-Streaming-Preferences-Explained-TCP-UDP
+    date: 2025-07-17
+
+drweb-geforce-now:
+  type: Article
+  author: Доктор Веб
+  title: "The hunt for vulnerability: executing arbitrary code on NVIDIA GeForce NOW virtual machines"
+  date: 2020-09-07
+  url:
+    value: https://habr.com/en/companies/drweb/articles/518052/
+    date: 2025-07-17
+  parent:
+    type: Blog
+    title: Habr
+
+google-stadia:
+  type: Article
+  title: A First Look at Google Stadia (Part 1)
+  author: Albano, Justin
+  date: 2019-03-26
+  parent:
+    type: Blog
+    title: DZone
+  url:
+    value: https://dzone.com/articles/a-first-look-at-google-stadia
+    date: 2025-07-17
+
+proxmox-gpu-isolation-thread:
+  type: Thread
+  title: Isolation of tasks using GPU (not at the same time)
+  author: FredreikSchack
+  date: 2023-08-02
+  url:
+    value: https://forum.proxmox.com/threads/isolation-of-tasks-using-gpu-not-at-the-same-time.131575/
+    date: 2025-07-17
+
+ioriver-low-latency:
+  type: Web
+  title: Low Latency Streaming
+  author: Hakimi, Michael
+  date: 2024-11-21
+  url:
+    value: https://www.ioriver.io/terms/low-latency-streaming
+    date: 2025-07-18
+
+castr-video-latency:
+  type: Web
+  title: "Video Latency: What Is It & How Does It Matter in Streaming?"
+  url:
+    value: https://castr.com/blog/what-is-video-latency/
+    date: 2025-07-18
+  date: 2023-11-04
+
+flussonic-webrtc:
+  type: Article
+  title: "Low-Latency WebRTC Streaming: Real-Time Video at Scale"
+  author: Flussonic
+  date: 2025-05-23
+  url:
+    value: https://flussonic.com/blog/article/low-latency-webrtc-streaming
+    date: 2025-07-18
+  parent:
+    type: Blog
+    title: Flussonic Blog
+    organization: Flussonic
+
+nat-traversal-webrtc:
+  type: Web
+  title: What is NAT Traversal in WebRTC?
+  author: Nabto
+  url:
+    value: https://www.nabto.com/what-is-nat-traversal-in-webrtc/
+    date: 2025-07-18
+
+srt-ossrs:
+  type: Web
+  title: SRT
+  author: OSSRS Community
+  date: 2024-04-07
+  url:
+    value: https://ossrs.net/lts/en-us/docs/v5/doc/srt
+    date: 2025-07-18

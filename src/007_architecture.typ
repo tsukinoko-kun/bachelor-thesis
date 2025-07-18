@@ -49,19 +49,13 @@ Dieser Upload-Vorgang löst via Amazon EventBridge automatisch den Start des Ima
 
 == C4: Context
 
-#figure(image("img/c1.jpg"), caption: "C4-Modell - Context", placement: auto)
-
 Das System interagiert mit zwei primären Akteuren: dem Spielentwickler und dem Spieler.
 Der Entwickler stellt die Spielinhalte bereit, indem er sie auf die Plattform hochlädt.
 Der Spieler nutzt die Plattform, um auf diese Inhalte zuzugreifen und das Spiel zu streamen.
 
-== C4: Container
+#figure(image("img/c1.jpg"), caption: "C4-Modell - Context")
 
-#figure(
-  image("img/c2.jpg"),
-  caption: "C4-Modell - Container",
-  placement: auto,
-)
+== C4: Container
 
 Die Architektur basiert auf zwei zentralen, asynchronen Prozessen: der automatisierten Erstellung eines AMI und dem spielerinitiierten Start einer EC2-Instanz.
 
@@ -95,3 +89,8 @@ Es ruft periodisch einen zweiten API-Gateway-Endpunkt auf und übergibt dabei di
 Eine weitere Lambda-Funktion fragt den Status der EC2-Instanz ab.
 Sobald die Instanz den Zustand "running" erreicht hat, liefert die Funktion die öffentliche IP-Adresse der Instanz zurück.
 Nach Erhalt der Verbindungsdaten etabliert das Frontend eine direkte Verbindung zur EC2-Instanz, um eine minimale Latenz im Game-Stream zu gewährleisten. @fei1998measurements
+
+#figure(
+  image("img/c2.jpg"),
+  caption: "C4-Modell - Container",
+)

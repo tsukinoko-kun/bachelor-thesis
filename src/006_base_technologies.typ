@@ -1,4 +1,4 @@
-= Basistechnologien
+= Basistechnologien für den verfolgten Ansatz
 
 Für den Betrieb der Spiele-Server kommen EC2 G5-Instanzen von AWS zum Einsatz. Diese Wahl begründet sich durch die vom Hersteller hervorgehobene Eignung für rechenintensive 3D-Anwendungen sowie die leistungsfähige Netzwerkanbindung. @aws-ec2-g5-instances Beide Aspekte sind für den in dieser Arbeit beschriebenen Anwendungsfall von entscheidender Bedeutung.
 

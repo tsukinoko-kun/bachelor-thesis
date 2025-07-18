@@ -35,65 +35,6 @@ und Intel strategisch auf andere Marktsegmente, weshalb NVIDIA-Technologien
 für die hier betrachteten Anwendungsfälle von besonderer Relevanz sind
 @alcorn-2024-amd-strategy @jaykihn0-2025-x-post.
 
-NVIDIA stellt eine Reihe von Schlüsseltechnologien zur Verfügung, die
-maßgeblich zur Leistungssteigerung bei grafisch anspruchsvollen Spielen
-beitragen und somit die Hardware-Anforderungen adressieren:
-
-=== Multi Frame Generation
-
-Multi Frame Generation ist ein fortschrittliches Verfahren zur Synthese von
-Bildern, das darauf abzielt, die wahrgenommene Bildwiederholrate (Framerate)
-signifikant zu erhöhen. Im Gegensatz zur Generierung eines einzelnen
-Zwischenbildes, wie es bei früheren Implementierungen der Fall war, ist diese
-Technik in der Lage, mehrere Bilder zwischen zwei von der Game-Engine
-gerenderten Frames zu interpolieren. Unter Verwendung von Bewegungsvektoren,
-optischen Flussfeldern und temporalen Daten aus vorangegangenen Bildern
-rekonstruiert ein neuronales Netzwerk eine Sequenz von Zwischenbildern. Das
-primäre Ziel ist die Erzeugung einer als extrem flüssig wahrgenommenen
-Bewegung, die weit über die native Renderleistung der Hardware hinausgeht,
-insbesondere in CPU-limitierten Szenarien. @dlss4
-
-=== Transformer-basierte Ray Reconstruction
-
-Die Transformer-basierte Ray Reconstruction (TRR) ist eine Methode zur
-Rauschunterdrückung (Denoising) und Detailrekonstruktion von
-Ray-Tracing-Effekten, die auf einer Transformer-Architektur basiert. Anstelle
-von konventionellen Faltungsnetzwerken (CNNs) nutzt TRR die Fähigkeit von
-Transformern, globale Bildkontexte und langreichweitige Abhängigkeiten
-zwischen Pixeln zu analysieren. Dadurch kann das Modell fehlende oder
-verrauschte Lichtinformationen (z.B. Reflexionen, Schatten, globale
-Beleuchtung) mit höherer Genauigkeit und Kohärenz wiederherstellen. Dies
-resultiert in einer visuell präziseren und artefaktärmeren Darstellung von
-Ray-Tracing-Effekten im Vergleich zu früheren Denoising-Verfahren. @dlss4
-
-=== Transformer-basierte Super Resolution
-
-Transformer-basiertes Super Resolution (TSR) beschreibt den Prozess der
-Hochskalierung eines niedrig aufgelösten Bildes auf eine höhere
-Zielauflösung mittels eines Transformer-Modells. Ähnlich wie bei der Ray
-Reconstruction nutzt diese Technik die Stärke von Transformern bei der
-Erfassung globaler Kontexte. Durch die Analyse von niedrig aufgelösten
-Eingabebildern, Bewegungsvektoren und historischer Bilddaten rekonstruiert
-das neuronale Netzwerk ein hochaufgelöstes Bild. Der Vorteil gegenüber
-CNN-basierten Ansätzen liegt in der potenziell überlegenen Rekonstruktion von
-feinen Texturen und komplexen Mustern sowie einer verbesserten temporalen
-Stabilität, da das Modell logische Zusammenhänge über größere Bildbereiche
-hinweg herstellen kann. @dlss4
-
-=== Reflex Frame Warp
-
-Reflex Frame Warp ist eine Latenzkompensationstechnik, die speziell für den
-Einsatz mit Frame-Generation-Verfahren entwickelt wurde. Die durch die
-Interpolation von Bildern entstehende zusätzliche Latenz wird durch dieses
-Verfahren aktiv reduziert. Unmittelbar bevor ein generiertes Bild an den
-Monitor gesendet wird, erfasst das System die aktuellsten Eingabedaten des
-Nutzers (z.B. Mausbewegungen). Basierend auf diesen Daten wird das bereits
-fertiggestellte Bild minimal verzerrt ("warped"), um die Darstellung an die
-letzte bekannte Spieleraktion anzugleichen. Dieser Prozess korrigiert die
-Diskrepanz zwischen der angezeigten Bildinformation und der Intention des
-Spielers und reduziert somit die wahrgenommene "Input-to-Photon"-Latenz.
-@dlss4
-
 == Umfangreiche Binärdateien
 
 Eine logistische Herausforderung stellt das Management der Spieldateien dar.
@@ -115,14 +56,12 @@ Datenübertragung, beispielsweise bei der initialen Bereitstellung der Spiele
 auf den Servern. Bei einer serverseitigen Anbindung mit einer Bandbreite von
 $1 frac("Gb", "s")$ resultiert die Übertragung eines 100-GB-Spiels in einer
 Kopierzeit von:
-$ T("copy") = frac(100 "GB", 1 frac("Gb", "s")) = 800s approx 13.3 "Minuten" $
+$T("copy") = frac(100 "GB", 1 frac("Gb", "s")) = 800s approx 13.3 "Minuten"$
 
 Zum Vergleich: Der Download eines solchen Spiels durch einen Endnutzer in
 Deutschland mit einer durchschnittlichen Geschwindigkeit von
 $79.1 frac("Mb", "s")$ @steam-download-stats würde circa 2.8 Stunden dauern:
-$
-  T("copy") = frac(100 "GB", 79.1 frac("Mb", "s")) approx 10113.8s approx 2.8 "Stunden"
-$
+$T("copy") = frac(100 "GB", 79.1 frac("Mb", "s")) approx 10113.8s approx 2.8 "Stunden"$
 
 Da der Fokus dieser Arbeit auf grafisch anspruchsvollen AAA-Titeln liegt,
 werden Spiele mit geringerem Speicherbedarf, bei denen diese Problematik

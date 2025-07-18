@@ -1,6 +1,6 @@
 = Zielgruppe
 
-Zur Definition der Zielgruppe wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von Videospielen zukünftig kostenfrei über eine vom Publisher oder Entwickler bereitgestellte Cloud-Gaming-Plattform zu spielen, anstatt sie auf der eigenen Hardware installieren zu müssen.
+Um eine nutzerzentrierte Lösung zu entwickeln, wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von Videospielen zukünftig kostenfrei über eine vom Publisher oder Entwickler bereitgestellte Cloud-Gaming-Plattform zu spielen, anstatt sie auf der eigenen Hardware installieren zu müssen.
 
 Die Stichprobe umfasste 35 Personen, davon 32 aus Deutschland und drei aus den USA. Die Teilnehmerschaft setzte sich überwiegend aus Studierenden des Software-Engineerings sowie Personen anderer Berufs- und Altersgruppen zusammen. Die Teilnahme erfolgte freiwillig und ohne Anreize über das Online-Tool Blocksurvey.
 
@@ -18,7 +18,7 @@ Hinsichtlich der Installationsgröße gaben 94.3% an, Spiele mit einem Speicherb
   caption: "Umfrage - Wie groß sind die Spiele, die du spielst? (in GB)",
 )
 
-Eine deutliche Mehrheit bekundete zudem Interesse an sogenannten AAA-Spielen. Laut den Angaben auf der Vertriebsplattform Steam stellen diese Titel in der Regel die höchsten Anforderungen an die Hardware (CPU, GPU) und den Festplattenspeicher. @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
+Eine deutliche Mehrheit bekundete zudem Interesse an AAA-Spielen. Laut den Angaben auf der Vertriebsplattform Steam stellen diese Titel in der Regel die höchsten Anforderungen an die Hardware (CPU, GPU) und den Festplattenspeicher. @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
 
 #figure(
   image("img/interest_aaa.png"),
