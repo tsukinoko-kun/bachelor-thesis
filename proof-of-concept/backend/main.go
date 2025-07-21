@@ -1,6 +1,7 @@
 package main
 
 import (
+	"backend/internal/gstreamer"
 	"backend/internal/server"
 	"context"
 	"log"
@@ -15,6 +16,12 @@ func main() {
 		log.Fatal(err)
 	}
 	defer s.Stop(context.Background())
+
+	g := gstreamer.NewGStreamer()
+	if err := g.Start(); err != nil {
+		log.Fatal("Failed to start GStreamer pipeline:", err)
+	}
+	defer g.Stop()
 
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM, syscall.SIGINT, syscall.SIGQUIT, syscall.SIGHUP)
