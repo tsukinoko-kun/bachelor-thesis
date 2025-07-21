@@ -25,10 +25,14 @@ func (g *GStreamer) Start() error {
 	g.cmd = exec.Command(
 		"gst-launch-1.0",
 		"-v",
-		"videotestsrc",
-		"!", "video/x-raw,format=I420",
-		"!", "x264enc", "tune=zerolatency", "byte-stream=true", "key-int-max=30", "bitrate=512", "speed-preset=ultrafast",
+		"avfvideosrc", "capture-screen=true",
+		"!", "video/x-raw,framerate=10/1",
+		"!", "videoscale",
+		"!", "videoconvert",
+		"!", "queue",
+		"!", "x264enc", "tune=zerolatency", "byte-stream=true", "key-int-max=10", "insert-vui=true", "bitrate=2048", "speed-preset=ultrafast",
 		"!", "video/x-h264,profile=baseline",
+		"!", "queue",
 		"!", "rtph264pay", "config-interval=1", "pt=96",
 		"!", "udpsink", "host=127.0.0.1", "port=5004",
 	)
