@@ -2,13 +2,18 @@ package gstreamer
 
 import (
 	"log"
-	"os/exec"
 	"sync"
+
+	"github.com/go-gst/go-gst/gst"
 )
 
+func init() {
+	gst.Init(nil)
+}
+
 type GStreamer struct {
-	cmd  *exec.Cmd
-	lock sync.Mutex
+	pipeline *gst.Pipeline
+	lock     sync.Mutex
 }
 
 func NewGStreamer() *GStreamer {
@@ -18,46 +23,38 @@ func NewGStreamer() *GStreamer {
 func (g *GStreamer) Start() error {
 	g.lock.Lock()
 	defer g.lock.Unlock()
-	if g.cmd != nil && g.cmd.Process != nil {
+	if g.pipeline != nil {
 		return nil // Already running
 	}
-	// Build the gst-launch-1.0 command
-	g.cmd = exec.Command(
-		"gst-launch-1.0",
-		"-v",
-		"avfvideosrc", "capture-screen=true",
-		"!", "video/x-raw,framerate=10/1",
-		"!", "videoscale",
-		"!", "videoconvert",
-		"!", "queue",
-		"!", "x264enc", "tune=zerolatency", "byte-stream=true", "key-int-max=10", "insert-vui=true", "bitrate=2048", "speed-preset=ultrafast",
-		"!", "video/x-h264,profile=baseline",
-		"!", "queue",
-		"!", "rtph264pay", "config-interval=1", "pt=96",
-		"!", "udpsink", "host=127.0.0.1", "port=5004",
-	)
-	g.cmd.Stdout = log.Writer()
-	g.cmd.Stderr = log.Writer()
-	if err := g.cmd.Start(); err != nil {
-		g.cmd = nil
+
+	pipelineStr := "avfvideosrc capture-screen=true ! video/x-raw,framerate=10/1 ! videoscale ! videoconvert ! queue ! x264enc tune=zerolatency byte-stream=true key-int-max=10 insert-vui=true bitrate=2048 speed-preset=ultrafast ! video/x-h264,profile=baseline ! queue ! rtph264pay config-interval=1 pt=96 ! udpsink host=127.0.0.1 port=5004"
+
+	pipeline, err := gst.NewPipelineFromString(pipelineStr)
+	if err != nil {
 		return err
 	}
-	log.Println("GStreamer pipeline started")
+	g.pipeline = pipeline
+
+	err = g.pipeline.SetState(gst.StatePlaying)
+	if err != nil {
+		g.pipeline = nil
+		return err
+	}
+	log.Println("GStreamer pipeline started (go-gst)")
 	return nil
 }
 
 func (g *GStreamer) Stop() error {
 	g.lock.Lock()
 	defer g.lock.Unlock()
-	if g.cmd == nil || g.cmd.Process == nil {
+	if g.pipeline == nil {
 		return nil // Not running
 	}
-	err := g.cmd.Process.Kill()
+	err := g.pipeline.SetState(gst.StateNull)
 	if err != nil {
 		return err
 	}
-	_, waitErr := g.cmd.Process.Wait()
-	g.cmd = nil
-	log.Println("GStreamer pipeline stopped")
-	return waitErr
+	g.pipeline = nil
+	log.Println("GStreamer pipeline stopped (go-gst)")
+	return nil
 }
