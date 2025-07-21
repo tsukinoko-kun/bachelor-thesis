@@ -1,17 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Game Stream</title>
-    <style>
-      video {
-        pointer-events: none;
-      }
-    </style>
-  </head>
-  <body>
-    <video id="video" controls autoplay muted style="width: 100%; max-width: 800px;"></video>
-    <script type="module" src="/src/main.ts"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#000" />
+  <title>Game Stream</title>
+  <style>
+    :root,
+    body {
+      background: #000;
+    }
+
+    #video {
+      pointer-events: none;
+      position: fixed;
+      display: block;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+    }
+  </style>
+</head>
+
+<body>
+  <video id="video" autoplay muted playsinline></video>
+  <script type="module" src="/src/main.ts"></script>
+</body>
+
 </html>

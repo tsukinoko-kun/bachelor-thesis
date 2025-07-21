@@ -1,5 +1,5 @@
 frontend:
-    cd frontend && pnpm install && pnpm run dev
+    cd frontend && pnpm install && pnpm run dev --host
 
 backend:
     cd backend && go mod tidy && air
