@@ -27,9 +27,7 @@ func (g *GStreamer) Start() error {
 		return nil // Already running
 	}
 
-	pipelineStr := "avfvideosrc capture-screen=true ! video/x-raw,framerate=10/1 ! videoscale ! videoconvert ! queue ! x264enc tune=zerolatency byte-stream=true key-int-max=10 insert-vui=true bitrate=2048 speed-preset=ultrafast ! video/x-h264,profile=baseline ! queue ! rtph264pay config-interval=1 pt=96 ! udpsink host=127.0.0.1 port=5004"
-
-	pipeline, err := gst.NewPipelineFromString(pipelineStr)
+	pipeline, err := gst.NewPipelineFromString(getPipelineStr())
 	if err != nil {
 		return err
 	}
