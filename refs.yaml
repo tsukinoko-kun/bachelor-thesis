@@ -485,3 +485,20 @@ srt-ossrs:
   url:
     value: https://ossrs.net/lts/en-us/docs/v5/doc/srt
     date: 2025-07-18
+
+ffmpeg-formats:
+  type: Web
+  title: FFmpeg Formats
+  url:
+    value: https://ffmpeg.org/ffmpeg-formats.html
+    date: 2025-08-03
+  organization: FFmpeg Project
+
+gstreamer-vs-ffmpeg:
+  type: Web
+  title: "Gstreamer vs ffmpeg latency: Choosing the right streaming solution for your business"
+  author: K, Gaviraj
+  date: 2025-01-27
+  url:
+    value: https://www.byteplus.com/en/topic/179638?title=gstreamer-vs-ffmpeg-latency-choosing-the-right-streaming-solution-for-your-business
+    date: 2025-08-03
