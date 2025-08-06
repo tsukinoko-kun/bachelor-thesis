@@ -120,37 +120,17 @@ func handleMouseRelease(data map[string]any) {
 func handleKeyPress(data map[string]any) {
 	key, _ := data["key"].(string)
 	code, _ := data["code"].(string)
-	ctrlKey, _ := data["ctrlKey"].(bool)
-	shiftKey, _ := data["shiftKey"].(bool)
-	altKey, _ := data["altKey"].(bool)
-	metaKey, _ := data["metaKey"].(bool)
 
-	log.Printf("Key press: key=%s, code=%s, ctrl=%t, shift=%t, alt=%t, meta=%t",
-		key, code, ctrlKey, shiftKey, altKey, metaKey)
-
-	// Check if this is a modifier key itself
-	isModifierKey := key == "Shift" || key == "Control" || key == "Alt" || key == "Meta" ||
-		key == "ShiftLeft" || key == "ShiftRight" ||
-		key == "ControlLeft" || key == "ControlRight" ||
-		key == "AltLeft" || key == "AltRight" ||
-		key == "MetaLeft" || key == "MetaRight"
+	log.Printf("Key press: key=%s, code=%s", key, code)
 
 	// Convert JavaScript key to robotgo key
 	robotKey := convertJSKeyToRobotKey(key, code)
-	log.Printf("Converted key '%s' to robotgo key '%s', isModifier: %t", key, robotKey, isModifierKey)
+	log.Printf("Converted key '%s' to robotgo key '%s'", key, robotKey)
 
-	// Execute key press
-	log.Printf("Executing key press...")
-	if isModifierKey {
-		// For modifier keys, just press the key itself (no additional modifiers)
-		log.Printf("Pressing modifier key: %s", robotKey)
-		robotgo.KeyToggle(robotKey, "down")
-	} else {
-		// For regular keys, ignore modifier state since modifiers are sent separately
-		log.Printf("Pressing regular key: %s (ignoring modifier state)", robotKey)
-		robotgo.KeyTap(robotKey)
-	}
-	log.Printf("Key press execution completed")
+	// Execute key down (press only) - just like mouse buttons
+	log.Printf("Executing key down: %s", robotKey)
+	robotgo.KeyToggle(robotKey, "down")
+	log.Printf("Key down execution completed")
 }
 
 func handleKeyRelease(data map[string]any) {
@@ -158,21 +138,14 @@ func handleKeyRelease(data map[string]any) {
 	code, _ := data["code"].(string)
 	log.Printf("Key release: key=%s, code=%s", key, code)
 
-	// Check if this is a modifier key itself
-	isModifierKey := key == "Shift" || key == "Control" || key == "Alt" || key == "Meta" ||
-		key == "ShiftLeft" || key == "ShiftRight" ||
-		key == "ControlLeft" || key == "ControlRight" ||
-		key == "AltLeft" || key == "AltRight" ||
-		key == "MetaLeft" || key == "MetaRight"
+	// Convert JavaScript key to robotgo key
+	robotKey := convertJSKeyToRobotKey(key, code)
+	log.Printf("Converted key '%s' to robotgo key '%s'", key, robotKey)
 
-	if isModifierKey {
-		// For modifier keys, we need to release them
-		robotKey := convertJSKeyToRobotKey(key, code)
-		log.Printf("Releasing modifier key: %s", robotKey)
-		robotgo.KeyToggle(robotKey, "up")
-	}
-	// For regular keys, robotgo.KeyTap handles the full press+release cycle
-	// so we don't need to do anything for key release
+	// Execute key up (release only) - just like mouse buttons
+	log.Printf("Executing key up: %s", robotKey)
+	robotgo.KeyToggle(robotKey, "up")
+	log.Printf("Key up execution completed")
 }
 
 func convertJSKeyToRobotKey(key, code string) string {
