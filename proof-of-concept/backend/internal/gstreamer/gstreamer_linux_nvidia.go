@@ -60,7 +60,7 @@ nvideoconvert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 ! 
 h264parse ! 
 rtph264pay config-interval=1 pt=96 ! 
-udpsink host=127.0.0.1 port=5004`
+appsink name=rtpsink`
 
 const pipelineStrWayland = `pipewiresrc ! 
 video/x-raw,format=BGRx,framerate=60/1 ! 
@@ -70,4 +70,4 @@ nvideoconvert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 ! 
 h264parse ! 
 rtph264pay config-interval=1 pt=96 ! 
-udpsink host=127.0.0.1 port=5004`
+appsink name=rtpsink`

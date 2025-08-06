@@ -12,19 +12,20 @@ import (
 )
 
 func main() {
-	// Start a single GStreamer pipeline for the life of the server
-	g := gstreamer.NewGStreamer()
-	if err := g.Start(); err != nil {
-		log.Fatalf("Failed to start GStreamer: %v", err)
-	}
-	defer g.Stop()
-
 	// Start a single broadcaster for the life of the server
-	b, err := broadcaster.NewBroadcaster(5004)
+	b, err := broadcaster.NewBroadcaster()
 	if err != nil {
 		log.Fatalf("Failed to start broadcaster: %v", err)
 	}
 	defer b.Stop()
+
+	// Start a single GStreamer pipeline for the life of the server
+	// Pass the broadcaster as the data handler
+	g := gstreamer.NewGStreamer(b)
+	if err := g.Start(); err != nil {
+		log.Fatalf("Failed to start GStreamer: %v", err)
+	}
+	defer g.Stop()
 
 	// Start the HTTP server, passing it the broadcaster
 	s, err := server.Start(":8080", b)
