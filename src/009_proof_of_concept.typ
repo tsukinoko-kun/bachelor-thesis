@@ -120,7 +120,7 @@ udpsink host=127.0.0.1 port=5004
 *d3d11screencapturesrc* Direct3D-11–basierte Bildschirmquelle unter Windows.
 Liefert Frames direkt aus der GPU in D3D11-Speicher
 
-*video/x-raw(memory:D3D11Memory),framerate=60/160/1,width=1920,height=1080* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
+*video/x-raw(memory:D3D11Memory), framerate=60/160/1,width=1920,height=1080* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
 
 *d3d11convert* Konvertiert D3D11-Oberflächen (Farbformat/Pixel-Layout) in ein Format, das downstream weiterverarbeitet werden kann.
 
@@ -128,7 +128,7 @@ Ab hier wie bei Linux X11 beschrieben.
 
 ```
 d3d11screencapturesrc !
-video/x-raw(memory:D3D11Memory),framerate=60/1,width=1920,height=1080 !
+video/x-raw(memory:D3D11Memory), framerate=60/1,width=1920,height=1080 !
 d3d11convert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 !
 h264parse !
