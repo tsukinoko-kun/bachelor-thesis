@@ -1,13 +1,20 @@
 const video = document.getElementById("video") as HTMLVideoElement;
 const eventLog = document.getElementById("event-log") as HTMLDivElement;
+const connectionStatus = document.getElementById("connection-status") as HTMLDivElement;
+const pointerStatus = document.getElementById("pointer-status") as HTMLDivElement;
+const fullscreenStatus = document.getElementById("fullscreen-status") as HTMLDivElement;
 console.log("video element", video);
 
 const ws = new WebSocket(`ws://${location.hostname}:8080/ws`);
 
 let pc: RTCPeerConnection;
 let inputChannel: RTCDataChannel | null = null;
+let isPointerLocked = false;
 
 ws.onopen = async () => {
+  connectionStatus.textContent = "WebSocket Connected";
+  connectionStatus.className = "status-connected";
+  
   pc = createPeerConnection();
   pc.addTransceiver("video", { direction: "recvonly" });
   const offer = await pc.createOffer();
@@ -53,6 +60,8 @@ function createPeerConnection() {
       
       inputChannel.onopen = () => {
         console.log("Input data channel opened");
+        connectionStatus.textContent = "WebRTC Data Channel Ready";
+        connectionStatus.className = "status-connected";
       };
       
       inputChannel.onclose = () => {
@@ -122,38 +131,111 @@ function transmitInputEvent(inputEvent: InputEvent) {
   }
 }
 
+function requestFullscreen() {
+  if (!document.fullscreenElement) {
+    document.documentElement.requestFullscreen().catch((err) => {
+      console.warn("Failed to enter fullscreen:", err);
+    });
+  }
+}
+
+function requestPointerLock() {
+  if (!isPointerLocked) {
+    video.requestPointerLock();
+  }
+}
+
+function setupFullscreenAndPointerLock() {
+  // Handle fullscreen changes
+  document.addEventListener("fullscreenchange", () => {
+    if (document.fullscreenElement) {
+      console.log("Entered fullscreen");
+      fullscreenStatus.textContent = "Fullscreen: Yes";
+      fullscreenStatus.className = "status-fullscreen";
+    } else {
+      console.log("Exited fullscreen");
+      fullscreenStatus.textContent = "Fullscreen: No";
+      fullscreenStatus.className = "";
+    }
+  });
+
+  // Handle pointer lock changes
+  document.addEventListener("pointerlockchange", () => {
+    isPointerLocked = document.pointerLockElement === video;
+    if (isPointerLocked) {
+      console.log("Pointer locked");
+      pointerStatus.textContent = "Pointer: Locked";
+      pointerStatus.className = "status-locked";
+    } else {
+      console.log("Pointer unlocked");
+      pointerStatus.textContent = "Pointer: Unlocked";
+      pointerStatus.className = "";
+    }
+  });
+
+  // Handle pointer lock errors
+  document.addEventListener("pointerlockerror", () => {
+    console.error("Pointer lock failed");
+    pointerStatus.textContent = "Pointer: Lock Failed";
+  });
+}
+
 function setupInputCapture() {
-  let lastMouseX = 0;
-  let lastMouseY = 0;
-  let isFirstMove = true;
+  // Setup fullscreen and pointer lock handlers
+  setupFullscreenAndPointerLock();
 
   // Mouse events
   video.addEventListener("mousemove", (e) => {
-    if (isFirstMove) {
-      lastMouseX = e.clientX;
-      lastMouseY = e.clientY;
-      isFirstMove = false;
-      return;
+    let deltaX = 0;
+    let deltaY = 0;
+
+    if (isPointerLocked) {
+      // Use movementX/Y when pointer is locked (more accurate)
+      deltaX = e.movementX;
+      deltaY = e.movementY;
+    } else {
+      // Fallback to calculating delta from position (less accurate)
+      const rect = video.getBoundingClientRect();
+      const currentX = e.clientX - rect.left;
+      const currentY = e.clientY - rect.top;
+      
+      // Store last position for next calculation
+      if (!video.dataset.lastX || !video.dataset.lastY) {
+        video.dataset.lastX = currentX.toString();
+        video.dataset.lastY = currentY.toString();
+        return;
+      }
+      
+      const lastX = parseFloat(video.dataset.lastX);
+      const lastY = parseFloat(video.dataset.lastY);
+      
+      deltaX = currentX - lastX;
+      deltaY = currentY - lastY;
+      
+      video.dataset.lastX = currentX.toString();
+      video.dataset.lastY = currentY.toString();
     }
 
-    const deltaX = e.clientX - lastMouseX;
-    const deltaY = e.clientY - lastMouseY;
-    
-    lastMouseX = e.clientX;
-    lastMouseY = e.clientY;
-
-    const inputEvent = {
-      type: "mouse_move" as const,
-      data: { deltaX, deltaY },
-      timestamp: Date.now(),
-    };
-    
-    logEvent(inputEvent);
-    transmitInputEvent(inputEvent);
+    // Only send if there's actual movement
+    if (deltaX !== 0 || deltaY !== 0) {
+      const inputEvent = {
+        type: "mouse_move" as const,
+        data: { deltaX, deltaY },
+        timestamp: Date.now(),
+      };
+      
+      logEvent(inputEvent);
+      transmitInputEvent(inputEvent);
+    }
   });
 
   video.addEventListener("mousedown", (e) => {
     e.preventDefault();
+    
+    // Request fullscreen and pointer lock on first click
+    requestFullscreen();
+    requestPointerLock();
+    
     const rect = video.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
@@ -202,6 +284,18 @@ function setupInputCapture() {
   video.focus();
 
   video.addEventListener("keydown", (e) => {
+    // Handle escape key to exit fullscreen and unlock pointer
+    if (e.key === "Escape") {
+      if (document.fullscreenElement) {
+        document.exitFullscreen();
+      }
+      if (isPointerLocked) {
+        document.exitPointerLock();
+      }
+      // Don't prevent default for Escape to allow browser handling
+      return;
+    }
+    
     e.preventDefault();
 
     const inputEvent = {
@@ -248,6 +342,9 @@ function setupInputCapture() {
   // Handle focus to ensure keyboard events work
   video.addEventListener("click", () => {
     video.focus();
+    // Also request fullscreen and pointer lock on any click
+    requestFullscreen();
+    requestPointerLock();
   });
 
   console.log("Input capture setup complete");

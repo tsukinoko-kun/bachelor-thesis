@@ -62,13 +62,44 @@
     .event-data {
       color: #ccc;
     }
+
+    #status div {
+      margin-bottom: 3px;
+      font-size: 11px;
+    }
+
+    #status h4 {
+      margin: 10px 0 5px 0;
+      color: #0ff;
+      font-size: 12px;
+    }
+
+    .status-connected {
+      color: #0f0 !important;
+    }
+
+    .status-locked {
+      color: #0f0 !important;
+    }
+
+    .status-fullscreen {
+      color: #0f0 !important;
+    }
   </style>
 </head>
 
 <body>
   <video id="video" autoplay muted playsinline></video>
   <div id="debug">
-    <h3>Input Events</h3>
+    <h3>Remote Desktop</h3>
+    <div id="status">
+      <div>Click video to enter fullscreen & lock cursor</div>
+      <div>Press ESC to exit fullscreen & unlock cursor</div>
+      <div id="connection-status">Connecting...</div>
+      <div id="pointer-status">Pointer: Unlocked</div>
+      <div id="fullscreen-status">Fullscreen: No</div>
+    </div>
+    <h4>Input Events</h4>
     <div id="event-log"></div>
   </div>
   <script type="module" src="/src/main.ts"></script>
