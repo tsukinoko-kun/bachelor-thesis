@@ -502,3 +502,11 @@ gstreamer-vs-ffmpeg:
   url:
     value: https://www.byteplus.com/en/topic/179638?title=gstreamer-vs-ffmpeg-latency-choosing-the-right-streaming-solution-for-your-business
     date: 2025-08-03
+
+webrtc-data-channels:
+  type: Web
+  title: Data channels
+  date: 2020-08-03
+  url:
+    value: https://webrtc.org/getting-started/data-channels
+    date: 2025-08-06

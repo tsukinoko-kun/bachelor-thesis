@@ -1,8 +1,14 @@
 const video = document.getElementById("video") as HTMLVideoElement;
 const eventLog = document.getElementById("event-log") as HTMLDivElement;
-const connectionStatus = document.getElementById("connection-status") as HTMLDivElement;
-const pointerStatus = document.getElementById("pointer-status") as HTMLDivElement;
-const fullscreenStatus = document.getElementById("fullscreen-status") as HTMLDivElement;
+const connectionStatus = document.getElementById(
+  "connection-status",
+) as HTMLDivElement;
+const pointerStatus = document.getElementById(
+  "pointer-status",
+) as HTMLDivElement;
+const fullscreenStatus = document.getElementById(
+  "fullscreen-status",
+) as HTMLDivElement;
 console.log("video element", video);
 
 const ws = new WebSocket(`ws://${location.hostname}:8080/ws`);
@@ -14,7 +20,7 @@ let isPointerLocked = false;
 ws.onopen = async () => {
   connectionStatus.textContent = "WebSocket Connected";
   connectionStatus.className = "status-connected";
-  
+
   pc = createPeerConnection();
   pc.addTransceiver("video", { direction: "recvonly" });
   const offer = await pc.createOffer();
@@ -50,31 +56,31 @@ function createPeerConnection() {
       ws.send(JSON.stringify({ candidate: event.candidate }));
     }
   };
-  
+
   // Handle incoming data channels from the server
   pc.ondatachannel = (event) => {
     const channel = event.channel;
     if (channel.label === "input") {
       inputChannel = channel;
       console.log("Input data channel received");
-      
+
       inputChannel.onopen = () => {
         console.log("Input data channel opened");
         connectionStatus.textContent = "WebRTC Data Channel Ready";
         connectionStatus.className = "status-connected";
       };
-      
+
       inputChannel.onclose = () => {
         console.log("Input data channel closed");
         inputChannel = null;
       };
-      
+
       inputChannel.onerror = (error) => {
         console.error("Input data channel error:", error);
       };
     }
   };
-  
+
   return pc;
 }
 
@@ -119,10 +125,13 @@ function transmitInputEvent(inputEvent: InputEvent) {
       inputChannel.send(JSON.stringify(inputEvent));
       return;
     } catch (error) {
-      console.warn("Failed to send via data channel, falling back to WebSocket:", error);
+      console.warn(
+        "Failed to send via data channel, falling back to WebSocket:",
+        error,
+      );
     }
   }
-  
+
   // Fallback to WebSocket
   if (ws.readyState === WebSocket.OPEN) {
     ws.send(JSON.stringify({ inputEvent }));
@@ -198,20 +207,20 @@ function setupInputCapture() {
       const rect = video.getBoundingClientRect();
       const currentX = e.clientX - rect.left;
       const currentY = e.clientY - rect.top;
-      
+
       // Store last position for next calculation
       if (!video.dataset.lastX || !video.dataset.lastY) {
         video.dataset.lastX = currentX.toString();
         video.dataset.lastY = currentY.toString();
         return;
       }
-      
+
       const lastX = parseFloat(video.dataset.lastX);
       const lastY = parseFloat(video.dataset.lastY);
-      
+
       deltaX = currentX - lastX;
       deltaY = currentY - lastY;
-      
+
       video.dataset.lastX = currentX.toString();
       video.dataset.lastY = currentY.toString();
     }
@@ -223,7 +232,7 @@ function setupInputCapture() {
         data: { deltaX, deltaY },
         timestamp: Date.now(),
       };
-      
+
       logEvent(inputEvent);
       transmitInputEvent(inputEvent);
     }
@@ -231,11 +240,11 @@ function setupInputCapture() {
 
   video.addEventListener("mousedown", (e) => {
     e.preventDefault();
-    
+
     // Request fullscreen and pointer lock on first click
     requestFullscreen();
     requestPointerLock();
-    
+
     const rect = video.getBoundingClientRect();
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
@@ -249,7 +258,7 @@ function setupInputCapture() {
       },
       timestamp: Date.now(),
     };
-    
+
     logEvent(inputEvent);
     transmitInputEvent(inputEvent);
   });
@@ -269,7 +278,7 @@ function setupInputCapture() {
       },
       timestamp: Date.now(),
     };
-    
+
     logEvent(inputEvent);
     transmitInputEvent(inputEvent);
   });
@@ -295,7 +304,7 @@ function setupInputCapture() {
       // Don't prevent default for Escape to allow browser handling
       return;
     }
-    
+
     e.preventDefault();
 
     const inputEvent = {
@@ -312,7 +321,7 @@ function setupInputCapture() {
       },
       timestamp: Date.now(),
     };
-    
+
     logEvent(inputEvent);
     transmitInputEvent(inputEvent);
   });
@@ -334,7 +343,7 @@ function setupInputCapture() {
       },
       timestamp: Date.now(),
     };
-    
+
     logEvent(inputEvent);
     transmitInputEvent(inputEvent);
   });
@@ -349,4 +358,3 @@ function setupInputCapture() {
 
   console.log("Input capture setup complete");
 }
-
