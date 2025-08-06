@@ -43,6 +43,11 @@ Use Go.
 
 Wrap errors with `fmt.Errorf` using `%w` to add additional context to the error.
 
+Use modern Go.
+Use `any` instead of `interface{}`.
+For loops copy the iterating variable, no need to copy them manually.
+Don't use `ioutil` package, it is deprecated.
+
 Run `go build ./...` and `go test ./...` before you claim to be finished.
 
 ## Frontend

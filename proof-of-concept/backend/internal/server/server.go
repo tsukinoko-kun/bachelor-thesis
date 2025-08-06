@@ -20,9 +20,9 @@ import (
 )
 
 type InputEvent struct {
-	Type      string                 `json:"type"`
-	Data      map[string]interface{} `json:"data"`
-	Timestamp int64                  `json:"timestamp"`
+	Type      string         `json:"type"`
+	Data      map[string]any `json:"data"`
+	Timestamp int64          `json:"timestamp"`
 }
 
 func handleInputEvent(data []byte) {
@@ -50,7 +50,7 @@ func handleInputEvent(data []byte) {
 	}
 }
 
-func handleMouseMove(data map[string]interface{}) {
+func handleMouseMove(data map[string]any) {
 	deltaX, _ := data["deltaX"].(float64)
 	deltaY, _ := data["deltaY"].(float64)
 	log.Printf("Mouse move: deltaX=%.2f, deltaY=%.2f", deltaX, deltaY)
@@ -71,7 +71,7 @@ func handleMouseMove(data map[string]interface{}) {
 	verifyX, verifyY := robotgo.Location()
 	log.Printf("Mouse position after move: (%d, %d)", verifyX, verifyY)
 }
-func handleMouseClick(data map[string]interface{}) {
+func handleMouseClick(data map[string]any) {
 	button, _ := data["button"].(float64)
 	x, _ := data["x"].(float64)
 	y, _ := data["y"].(float64)
@@ -94,7 +94,7 @@ func handleMouseClick(data map[string]interface{}) {
 	log.Printf("Executing mouse down: %s", buttonStr)
 	robotgo.Toggle(buttonStr, "down")
 }
-func handleMouseRelease(data map[string]interface{}) {
+func handleMouseRelease(data map[string]any) {
 	button, _ := data["button"].(float64)
 	x, _ := data["x"].(float64)
 	y, _ := data["y"].(float64)
@@ -117,7 +117,7 @@ func handleMouseRelease(data map[string]interface{}) {
 	log.Printf("Executing mouse up: %s", buttonStr)
 	robotgo.Toggle(buttonStr, "up")
 }
-func handleKeyPress(data map[string]interface{}) {
+func handleKeyPress(data map[string]any) {
 	key, _ := data["key"].(string)
 	code, _ := data["code"].(string)
 	ctrlKey, _ := data["ctrlKey"].(bool)
@@ -128,50 +128,67 @@ func handleKeyPress(data map[string]interface{}) {
 	log.Printf("Key press: key=%s, code=%s, ctrl=%t, shift=%t, alt=%t, meta=%t",
 		key, code, ctrlKey, shiftKey, altKey, metaKey)
 
-	// Handle modifier keys
-	var modifiers []string
-	if ctrlKey {
-		modifiers = append(modifiers, "ctrl")
-	}
-	if shiftKey {
-		modifiers = append(modifiers, "shift")
-	}
-	if altKey {
-		modifiers = append(modifiers, "alt")
-	}
-	if metaKey {
-		modifiers = append(modifiers, "cmd")
-	}
+	// Check if this is a modifier key itself
+	isModifierKey := key == "Shift" || key == "Control" || key == "Alt" || key == "Meta" ||
+		key == "ShiftLeft" || key == "ShiftRight" ||
+		key == "ControlLeft" || key == "ControlRight" ||
+		key == "AltLeft" || key == "AltRight" ||
+		key == "MetaLeft" || key == "MetaRight"
 
 	// Convert JavaScript key to robotgo key
 	robotKey := convertJSKeyToRobotKey(key, code)
-	log.Printf("Converted key '%s' to robotgo key '%s', modifiers: %v", key, robotKey, modifiers)
+	log.Printf("Converted key '%s' to robotgo key '%s', isModifier: %t", key, robotKey, isModifierKey)
 
 	// Execute key press
 	log.Printf("Executing key press...")
-	if len(modifiers) > 0 {
-		// Key combination with modifiers
-		log.Printf("Pressing key combination: %s + %v", robotKey, modifiers)
-		robotgo.KeyTap(robotKey, modifiers)
+	if isModifierKey {
+		// For modifier keys, just press the key itself (no additional modifiers)
+		log.Printf("Pressing modifier key: %s", robotKey)
+		robotgo.KeyToggle(robotKey, "down")
 	} else {
-		// Single key press
-		log.Printf("Pressing single key: %s", robotKey)
+		// For regular keys, ignore modifier state since modifiers are sent separately
+		log.Printf("Pressing regular key: %s (ignoring modifier state)", robotKey)
 		robotgo.KeyTap(robotKey)
 	}
 	log.Printf("Key press execution completed")
 }
-func handleKeyRelease(data map[string]interface{}) {
+
+func handleKeyRelease(data map[string]any) {
 	key, _ := data["key"].(string)
 	code, _ := data["code"].(string)
 	log.Printf("Key release: key=%s, code=%s", key, code)
 
-	// For key release, we typically don't need to do anything special
-	// as robotgo.KeyTap handles the full press+release cycle
-	// This is mainly for logging purposes
+	// Check if this is a modifier key itself
+	isModifierKey := key == "Shift" || key == "Control" || key == "Alt" || key == "Meta" ||
+		key == "ShiftLeft" || key == "ShiftRight" ||
+		key == "ControlLeft" || key == "ControlRight" ||
+		key == "AltLeft" || key == "AltRight" ||
+		key == "MetaLeft" || key == "MetaRight"
+
+	if isModifierKey {
+		// For modifier keys, we need to release them
+		robotKey := convertJSKeyToRobotKey(key, code)
+		log.Printf("Releasing modifier key: %s", robotKey)
+		robotgo.KeyToggle(robotKey, "up")
+	}
+	// For regular keys, robotgo.KeyTap handles the full press+release cycle
+	// so we don't need to do anything for key release
 }
 
 func convertJSKeyToRobotKey(key, code string) string {
-	// Handle special keys first
+	// Handle modifier keys first
+	switch key {
+	case "Shift", "ShiftLeft", "ShiftRight":
+		return "shift"
+	case "Control", "ControlLeft", "ControlRight":
+		return "ctrl"
+	case "Alt", "AltLeft", "AltRight":
+		return "alt"
+	case "Meta", "MetaLeft", "MetaRight":
+		return "cmd"
+	}
+
+	// Handle special keys
 	switch key {
 	case "Enter":
 		return "enter"
@@ -305,7 +322,7 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Println("Sending ICE candidate")
-		_ = conn.WriteJSON(map[string]interface{}{
+		_ = conn.WriteJSON(map[string]any{
 			"candidate": c.ToJSON(),
 		})
 	})
@@ -349,14 +366,14 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 			return
 		}
 		log.Println("Received signaling message:", string(msg))
-		var signal map[string]interface{}
+		var signal map[string]any
 		if err := json.Unmarshal(msg, &signal); err != nil {
 			log.Println(
 				errors.Join(errors.New("Failed to unmarshal signal"), err),
 			)
 			continue
 		}
-		if sdp, ok := signal["sdp"].(map[string]interface{}); ok {
+		if sdp, ok := signal["sdp"].(map[string]any); ok {
 			typeStr, _ := sdp["type"].(string)
 			sdpStr, _ := sdp["sdp"].(string)
 			log.Println("Received SDP:", typeStr)
@@ -393,9 +410,9 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 					continue
 				}
 				log.Println("Sending SDP answer")
-				_ = conn.WriteJSON(map[string]interface{}{"sdp": answer})
+				_ = conn.WriteJSON(map[string]any{"sdp": answer})
 			}
-		} else if candidate, ok := signal["candidate"].(map[string]interface{}); ok {
+		} else if candidate, ok := signal["candidate"].(map[string]any); ok {
 			cand := webrtc.ICECandidateInit{}
 			b, _ := json.Marshal(candidate)
 			_ = json.Unmarshal(b, &cand)
@@ -408,7 +425,7 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 					),
 				)
 			}
-		} else if inputEventData, ok := signal["inputEvent"].(map[string]interface{}); ok {
+		} else if inputEventData, ok := signal["inputEvent"].(map[string]any); ok {
 			// Handle input events received via WebSocket fallback
 			b, _ := json.Marshal(inputEventData)
 			handleInputEvent(b)
