@@ -50,9 +50,7 @@ Damage wird nicht verwendet, weil Hardware-Encoder wie nvh264enc komplette Frame
 *config-interval=1* Sendet SPS/PPS (Decoder-Konfigurationsdaten) alle 1 Sekunde neu.
 *pt=96* Dynamischer RTP-Payload-Type 96.
 
-*udpsink* UDP-Output.
-*host=127.0.0.1* Ziel-IP für den Stream.
-*port=5004* Ziel-Port für den Stream.
+*appsink* ist ein Sink-Element, das die Daten an die Applikation (in diesem Fall den Go-Code) übergibt. Der Name *rtpsink* wird verwendet, um das Element im Code zu referenzieren.
 
 ```
 ximagesrc use-damage=false !
@@ -63,7 +61,7 @@ nvideoconvert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 !
 h264parse !
 rtph264pay config-interval=1 pt=96 !
-udpsink host=127.0.0.1 port=5004
+appsink name=rtpsink
 ```
 
 ==== Wayland
@@ -83,14 +81,14 @@ nvideoconvert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 !
 h264parse !
 rtph264pay config-interval=1 pt=96 !
-udpsink host=127.0.0.1 port=5004
+appsink name=rtpsink
 ```
 
 === Mac
 
 *avfvideosrc* AVFoundation-Source auf macOS, nimmt den Bildschirm auf.
 
-*video/x-raw,framerate=60/160/1* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
+*video/x-raw,framerate=60/1* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
 
 *videoscale* CPU-basiertes Skalieren des Bildes.
 
@@ -102,7 +100,7 @@ udpsink host=127.0.0.1 port=5004
 *bitrate=10000* setzt die Zielbitrate auf $10000 frac("kb", "s")$.
 *max-keyframe-interval=60* Maximal alle 60 Frames ein Keyframe (bei 60 fps → 1 Keyframe/s).
 
-Ab hier wie bei Linux X11 beschrieben.
+Ab `h264parse` ist die Pipeline wie bei Linux X11 beschrieben.
 
 ```
 avfvideosrc capture-screen=true !
@@ -112,7 +110,7 @@ video/x-raw,width=1920,height=1080 !
 vtenc_h264_hw realtime=true allow-frame-reordering=false bitrate=10000 max-keyframe-interval=60 !
 h264parse !
 rtph264pay config-interval=1 pt=96 !
-udpsink host=127.0.0.1 port=5004
+appsink name=rtpsink
 ```
 
 === Windows
@@ -120,11 +118,11 @@ udpsink host=127.0.0.1 port=5004
 *d3d11screencapturesrc* Direct3D-11–basierte Bildschirmquelle unter Windows.
 Liefert Frames direkt aus der GPU in D3D11-Speicher
 
-*video/x-raw(memory:D3D11Memory), framerate=60/160/1,width=1920,height=1080* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
+*video/x-raw(memory:D3D11Memory), framerate=60/1,width=1920,height=1080* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
 
 *d3d11convert* Konvertiert D3D11-Oberflächen (Farbformat/Pixel-Layout) in ein Format, das downstream weiterverarbeitet werden kann.
 
-Ab hier wie bei Linux X11 beschrieben.
+Ab `nvh264enc` ist die Pipeline wie bei Linux X11 beschrieben.
 
 ```
 d3d11screencapturesrc !
@@ -133,5 +131,16 @@ d3d11convert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 !
 h264parse !
 rtph264pay config-interval=1 pt=96 !
-udpsink host=127.0.0.1 port=5004
+appsink name=rtpsink
 ```
+
+=== Testsystem
+
+Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem ... als Client.
+
+== Spielereingaben
+
+Für das Proof of Concept wurde sich auf eine Steuerung mit Maus und Tastatur konzentriert. Später andere Eingabegeräte wie Gamepads einzufügen wäre kein Problem.
+
+WebRTC unterstützen Data-Channels, die beliebige Daten versenden können, die nicht zum eigentlichen Video-Stream gehören. @webrtc-data-channels
+Wenn die Verbindung über den Data-Channel nicht aufgebaut werden kann, wird WebSocket als Fallback verwendet.

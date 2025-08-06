@@ -1,3 +1,7 @@
+This software is a proof of concept for cloud gaming.
+
+I need as little latency as possible. Reduce network hops and big bandwidth usage.
+
 Project structure:
 
 ```

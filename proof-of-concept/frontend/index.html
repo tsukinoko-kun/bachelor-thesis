@@ -24,6 +24,25 @@
       object-position: center;
       background: #000;
       cursor: none;
+      
+      /* High-quality upscaling for 720p to full screen */
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+      image-rendering: pixelated;
+      
+      /* Modern browsers - use high quality scaling */
+      image-rendering: auto;
+      
+      /* Enable hardware acceleration for smooth scaling */
+      transform: translateZ(0);
+      will-change: transform;
+      
+      /* Anti-aliasing for smooth edges during upscaling */
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      
+      /* Ensure smooth scaling transitions */
+      transition: transform 0.1s ease-out;
     }
 
     #debug {
