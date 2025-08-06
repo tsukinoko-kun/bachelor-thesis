@@ -5,6 +5,7 @@ console.log("video element", video);
 const ws = new WebSocket(`ws://${location.hostname}:8080/ws`);
 
 let pc: RTCPeerConnection;
+let inputChannel: RTCDataChannel | null = null;
 
 ws.onopen = async () => {
   pc = createPeerConnection();
@@ -42,6 +43,29 @@ function createPeerConnection() {
       ws.send(JSON.stringify({ candidate: event.candidate }));
     }
   };
+  
+  // Handle incoming data channels from the server
+  pc.ondatachannel = (event) => {
+    const channel = event.channel;
+    if (channel.label === "input") {
+      inputChannel = channel;
+      console.log("Input data channel received");
+      
+      inputChannel.onopen = () => {
+        console.log("Input data channel opened");
+      };
+      
+      inputChannel.onclose = () => {
+        console.log("Input data channel closed");
+        inputChannel = null;
+      };
+      
+      inputChannel.onerror = (error) => {
+        console.error("Input data channel error:", error);
+      };
+    }
+  };
+  
   return pc;
 }
 
@@ -79,6 +103,25 @@ function logEvent(inputEvent: InputEvent) {
   }
 }
 
+function transmitInputEvent(inputEvent: InputEvent) {
+  // Try WebRTC data channel first (preferred for low latency)
+  if (inputChannel && inputChannel.readyState === "open") {
+    try {
+      inputChannel.send(JSON.stringify(inputEvent));
+      return;
+    } catch (error) {
+      console.warn("Failed to send via data channel, falling back to WebSocket:", error);
+    }
+  }
+  
+  // Fallback to WebSocket
+  if (ws.readyState === WebSocket.OPEN) {
+    ws.send(JSON.stringify({ inputEvent }));
+  } else {
+    console.warn("No available connection to transmit input event");
+  }
+}
+
 function setupInputCapture() {
   let lastMouseX = 0;
   let lastMouseY = 0;
@@ -99,11 +142,14 @@ function setupInputCapture() {
     lastMouseX = e.clientX;
     lastMouseY = e.clientY;
 
-    logEvent({
-      type: "mouse_move",
+    const inputEvent = {
+      type: "mouse_move" as const,
       data: { deltaX, deltaY },
       timestamp: Date.now(),
-    });
+    };
+    
+    logEvent(inputEvent);
+    transmitInputEvent(inputEvent);
   });
 
   video.addEventListener("mousedown", (e) => {
@@ -112,15 +158,18 @@ function setupInputCapture() {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    logEvent({
-      type: "mouse_click",
+    const inputEvent = {
+      type: "mouse_click" as const,
       data: {
         button: e.button,
         x: Math.round(x * 1000) / 1000,
         y: Math.round(y * 1000) / 1000,
       },
       timestamp: Date.now(),
-    });
+    };
+    
+    logEvent(inputEvent);
+    transmitInputEvent(inputEvent);
   });
 
   video.addEventListener("mouseup", (e) => {
@@ -129,15 +178,18 @@ function setupInputCapture() {
     const x = (e.clientX - rect.left) / rect.width;
     const y = (e.clientY - rect.top) / rect.height;
 
-    logEvent({
-      type: "mouse_release",
+    const inputEvent = {
+      type: "mouse_release" as const,
       data: {
         button: e.button,
         x: Math.round(x * 1000) / 1000,
         y: Math.round(y * 1000) / 1000,
       },
       timestamp: Date.now(),
-    });
+    };
+    
+    logEvent(inputEvent);
+    transmitInputEvent(inputEvent);
   });
 
   // Prevent context menu
@@ -152,8 +204,8 @@ function setupInputCapture() {
   video.addEventListener("keydown", (e) => {
     e.preventDefault();
 
-    logEvent({
-      type: "key_press",
+    const inputEvent = {
+      type: "key_press" as const,
       data: {
         key: e.key,
         code: e.code,
@@ -165,14 +217,17 @@ function setupInputCapture() {
         metaKey: e.metaKey,
       },
       timestamp: Date.now(),
-    });
+    };
+    
+    logEvent(inputEvent);
+    transmitInputEvent(inputEvent);
   });
 
   video.addEventListener("keyup", (e) => {
     e.preventDefault();
 
-    logEvent({
-      type: "key_release",
+    const inputEvent = {
+      type: "key_release" as const,
       data: {
         key: e.key,
         code: e.code,
@@ -184,7 +239,10 @@ function setupInputCapture() {
         metaKey: e.metaKey,
       },
       timestamp: Date.now(),
-    });
+    };
+    
+    logEvent(inputEvent);
+    transmitInputEvent(inputEvent);
   });
 
   // Handle focus to ensure keyboard events work

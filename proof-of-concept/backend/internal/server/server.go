@@ -11,11 +11,226 @@ import (
 	"net"
 	"net/http"
 	"os"
+	"strings"
 	"time"
 
+	"github.com/go-vgo/robotgo"
 	"github.com/gorilla/websocket"
 	"github.com/pion/webrtc/v3"
 )
+
+type InputEvent struct {
+	Type      string                 `json:"type"`
+	Data      map[string]interface{} `json:"data"`
+	Timestamp int64                  `json:"timestamp"`
+}
+
+func handleInputEvent(data []byte) {
+	var event InputEvent
+	if err := json.Unmarshal(data, &event); err != nil {
+		log.Printf("Failed to unmarshal input event: %v", err)
+		return
+	}
+
+	log.Printf("Received input event: %s with data: %v", event.Type, event.Data)
+
+	switch event.Type {
+	case "mouse_move":
+		handleMouseMove(event.Data)
+	case "mouse_click":
+		handleMouseClick(event.Data)
+	case "mouse_release":
+		handleMouseRelease(event.Data)
+	case "key_press":
+		handleKeyPress(event.Data)
+	case "key_release":
+		handleKeyRelease(event.Data)
+	default:
+		log.Printf("Unknown input event type: %s", event.Type)
+	}
+}
+
+func handleMouseMove(data map[string]interface{}) {
+	deltaX, _ := data["deltaX"].(float64)
+	deltaY, _ := data["deltaY"].(float64)
+	log.Printf("Mouse move: deltaX=%.2f, deltaY=%.2f", deltaX, deltaY)
+
+	// Get current mouse position
+	currentX, currentY := robotgo.Location()
+	log.Printf("Current mouse position: (%d, %d)", currentX, currentY)
+
+	// Apply relative movement
+	newX := currentX + int(deltaX)
+	newY := currentY + int(deltaY)
+	log.Printf("Moving mouse to: (%d, %d)", newX, newY)
+
+	// Move mouse to new position
+	robotgo.Move(newX, newY)
+
+	// Verify the move worked
+	verifyX, verifyY := robotgo.Location()
+	log.Printf("Mouse position after move: (%d, %d)", verifyX, verifyY)
+}
+func handleMouseClick(data map[string]interface{}) {
+	button, _ := data["button"].(float64)
+	x, _ := data["x"].(float64)
+	y, _ := data["y"].(float64)
+	log.Printf("Mouse click: button=%d, x=%.3f, y=%.3f", int(button), x, y)
+
+	// Convert button number to robotgo button string
+	var buttonStr string
+	switch int(button) {
+	case 0:
+		buttonStr = "left"
+	case 1:
+		buttonStr = "center"
+	case 2:
+		buttonStr = "right"
+	default:
+		buttonStr = "left"
+	}
+
+	// Execute mouse click
+	robotgo.Click(buttonStr)
+}
+
+func handleMouseRelease(data map[string]interface{}) {
+	button, _ := data["button"].(float64)
+	x, _ := data["x"].(float64)
+	y, _ := data["y"].(float64)
+	log.Printf("Mouse release: button=%d, x=%.3f, y=%.3f", int(button), x, y)
+
+	// Convert button number to robotgo button string
+	var buttonStr string
+	switch int(button) {
+	case 0:
+		buttonStr = "left"
+	case 1:
+		buttonStr = "center"
+	case 2:
+		buttonStr = "right"
+	default:
+		buttonStr = "left"
+	}
+
+	// Execute mouse release (toggle up)
+	robotgo.Toggle(buttonStr, "up")
+}
+
+func handleKeyPress(data map[string]interface{}) {
+	key, _ := data["key"].(string)
+	code, _ := data["code"].(string)
+	ctrlKey, _ := data["ctrlKey"].(bool)
+	shiftKey, _ := data["shiftKey"].(bool)
+	altKey, _ := data["altKey"].(bool)
+	metaKey, _ := data["metaKey"].(bool)
+
+	log.Printf("Key press: key=%s, code=%s, ctrl=%t, shift=%t, alt=%t, meta=%t",
+		key, code, ctrlKey, shiftKey, altKey, metaKey)
+
+	// Handle modifier keys
+	var modifiers []string
+	if ctrlKey {
+		modifiers = append(modifiers, "ctrl")
+	}
+	if shiftKey {
+		modifiers = append(modifiers, "shift")
+	}
+	if altKey {
+		modifiers = append(modifiers, "alt")
+	}
+	if metaKey {
+		modifiers = append(modifiers, "cmd")
+	}
+
+	// Convert JavaScript key to robotgo key
+	robotKey := convertJSKeyToRobotKey(key, code)
+	log.Printf("Converted key '%s' to robotgo key '%s', modifiers: %v", key, robotKey, modifiers)
+
+	// Execute key press
+	log.Printf("Executing key press...")
+	if len(modifiers) > 0 {
+		// Key combination with modifiers
+		log.Printf("Pressing key combination: %s + %v", robotKey, modifiers)
+		robotgo.KeyTap(robotKey, modifiers)
+	} else {
+		// Single key press
+		log.Printf("Pressing single key: %s", robotKey)
+		robotgo.KeyTap(robotKey)
+	}
+	log.Printf("Key press execution completed")
+}
+func handleKeyRelease(data map[string]interface{}) {
+	key, _ := data["key"].(string)
+	code, _ := data["code"].(string)
+	log.Printf("Key release: key=%s, code=%s", key, code)
+
+	// For key release, we typically don't need to do anything special
+	// as robotgo.KeyTap handles the full press+release cycle
+	// This is mainly for logging purposes
+}
+
+func convertJSKeyToRobotKey(key, code string) string {
+	// Handle special keys first
+	switch key {
+	case "Enter":
+		return "enter"
+	case "Escape":
+		return "esc"
+	case "Backspace":
+		return "backspace"
+	case "Tab":
+		return "tab"
+	case "Delete":
+		return "delete"
+	case "ArrowUp":
+		return "up"
+	case "ArrowDown":
+		return "down"
+	case "ArrowLeft":
+		return "left"
+	case "ArrowRight":
+		return "right"
+	case "Home":
+		return "home"
+	case "End":
+		return "end"
+	case "PageUp":
+		return "pageup"
+	case "PageDown":
+		return "pagedown"
+	case "Insert":
+		return "insert"
+	case "CapsLock":
+		return "capslock"
+	case "NumLock":
+		return "numlock"
+	case "ScrollLock":
+		return "scrolllock"
+	case "PrintScreen":
+		return "printscreen"
+	case "Pause":
+		return "pause"
+	case " ":
+		return "space"
+	}
+
+	// Handle function keys
+	if len(key) >= 2 && key[0] == 'F' {
+		switch key {
+		case "F1", "F2", "F3", "F4", "F5", "F6", "F7", "F8", "F9", "F10", "F11", "F12":
+			return strings.ToLower(key)
+		}
+	}
+
+	// Handle regular characters - robotgo expects lowercase
+	if len(key) == 1 {
+		return strings.ToLower(key)
+	}
+
+	// Fallback to the key as-is, converted to lowercase
+	return strings.ToLower(key)
+}
 
 type Server struct {
 	mux         *http.ServeMux
@@ -102,6 +317,25 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 		}
 	})
 
+	// Create data channel for input events
+	dataChannel, err := peerConnection.CreateDataChannel("input", nil)
+	if err != nil {
+		log.Println(errors.Join(errors.New("Failed to create data channel"), err))
+		return
+	}
+
+	dataChannel.OnOpen(func() {
+		log.Println("Input data channel opened")
+	})
+
+	dataChannel.OnMessage(func(msg webrtc.DataChannelMessage) {
+		handleInputEvent(msg.Data)
+	})
+
+	dataChannel.OnClose(func() {
+		log.Println("Input data channel closed")
+	})
+
 	for {
 		_, msg, err := conn.ReadMessage()
 		if err != nil {
@@ -174,6 +408,10 @@ func (s *Server) wsHandler(w http.ResponseWriter, r *http.Request) {
 					),
 				)
 			}
+		} else if inputEventData, ok := signal["inputEvent"].(map[string]interface{}); ok {
+			// Handle input events received via WebSocket fallback
+			b, _ := json.Marshal(inputEventData)
+			handleInputEvent(b)
 		}
 	}
 }
