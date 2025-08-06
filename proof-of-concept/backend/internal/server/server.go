@@ -90,10 +90,10 @@ func handleMouseClick(data map[string]interface{}) {
 		buttonStr = "left"
 	}
 
-	// Execute mouse click
-	robotgo.Click(buttonStr)
+	// Execute mouse down (press only)
+	log.Printf("Executing mouse down: %s", buttonStr)
+	robotgo.Toggle(buttonStr, "down")
 }
-
 func handleMouseRelease(data map[string]interface{}) {
 	button, _ := data["button"].(float64)
 	x, _ := data["x"].(float64)
@@ -113,10 +113,10 @@ func handleMouseRelease(data map[string]interface{}) {
 		buttonStr = "left"
 	}
 
-	// Execute mouse release (toggle up)
+	// Execute mouse release (up only)
+	log.Printf("Executing mouse up: %s", buttonStr)
 	robotgo.Toggle(buttonStr, "up")
 }
-
 func handleKeyPress(data map[string]interface{}) {
 	key, _ := data["key"].(string)
 	code, _ := data["code"].(string)
