@@ -37,6 +37,8 @@ Project structure:
 
 Make sure you are in the correct directory when running any commands.
 
+Frontend and backend are two separate applications. Don't mix them up!
+
 ## Backend
 
 Use Go.
@@ -51,6 +53,8 @@ Don't use `ioutil` package, it is deprecated.
 Run `go build ./...` and `go test ./...` before you claim to be finished.
 
 ## Frontend
+
+This is a Vite project. `index.html` is the entry point.
 
 Use PNPM. Use TypeScript.
 
