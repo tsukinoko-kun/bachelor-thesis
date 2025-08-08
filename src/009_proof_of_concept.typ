@@ -136,7 +136,7 @@ appsink name=rtpsink
 
 === Testsystem
 
-Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem ... als Client.
+Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem Windows Laptop mit AMD Ryzen 5 5500U und integrierter GPU als Client.
 
 == Spielereingaben
 

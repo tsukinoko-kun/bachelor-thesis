@@ -192,7 +192,7 @@ vantage-g5-2xlarge:
   title: "g5.2xlarge EC2 Instance - Vantage"
   author: "Vantage"
   url:
-    value: https://instances.vantage.sh/aws/ec2/g5.2xlarge?region=eu-central-1&platform=linux&duration=hourly
+    value: https://instances.vantage.sh/aws/ec2/g5.2xlarge?currency=EUR&region=eu-central-1
     date: 2025-06-16
   note: "Details und Preisangaben für die Region eu-central-1, Linux-Plattform und stündliche Abrechnung."
 
@@ -510,3 +510,13 @@ webrtc-data-channels:
   url:
     value: https://webrtc.org/getting-started/data-channels
     date: 2025-08-06
+
+aws-ec2-pricing-datatransfer:
+  type: Article
+  title: Data Transfer OUT From Amazon EC2 To Internet
+  parent:
+    type: Web
+    title: Amazon EC2 On-Demand Pricing
+    url:
+      value: https://aws.amazon.com/ec2/pricing/on-demand/
+      date: 2025-08-08

@@ -17,6 +17,28 @@ let pc: RTCPeerConnection;
 let inputChannel: RTCDataChannel | null = null;
 let isPointerLocked = false;
 
+let lastBytes = 0;
+let lastTimestamp = 0;
+
+setInterval(async () => {
+  if (!pc) return;
+
+  const stats = await pc.getStats();
+  stats.forEach((report) => {
+    if (report.type === "inbound-rtp" && report.kind === "video") {
+      if (lastTimestamp > 0) {
+        const bytesDiff = report.bytesReceived - lastBytes;
+        const timeDiff = (report.timestamp - lastTimestamp) / 1000; // in Sekunden
+        const bitrateBps = (bytesDiff * 8) / timeDiff; // bit/s
+        const bitrateMbps = bitrateBps / 1_000_000; // Mbit/s
+        console.log(`Bitrate: ${bitrateMbps.toFixed(2)} Mbit/s`);
+      }
+      lastBytes = report.bytesReceived;
+      lastTimestamp = report.timestamp;
+    }
+  });
+}, 1000);
+
 ws.onopen = async () => {
   connectionStatus.textContent = "WebSocket Connected";
   connectionStatus.className = "status-connected";
