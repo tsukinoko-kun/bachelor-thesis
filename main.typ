@@ -165,6 +165,7 @@
 #include "./src/008_implementing_stream_service.typ"
 #include "./src/009_proof_of_concept.typ"
 #include "./src/010_costs.typ"
+#include "./src/011_acceptance.typ"
 #bibliography("refs.yaml")
 #include "src/danksagung.typ"
 #include "src/eidesstattliche-erklaerung.typ"
