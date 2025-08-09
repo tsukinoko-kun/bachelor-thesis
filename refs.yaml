@@ -520,3 +520,11 @@ aws-ec2-pricing-datatransfer:
     url:
       value: https://aws.amazon.com/ec2/pricing/on-demand/
       date: 2025-08-08
+
+network-link-conditioner:
+  type: Web
+  title: "Network Link Conditioner: Simulating Slow Networking"
+  author: van der Lee, Antoine
+  url:
+    value: https://www.avanderlee.com/debugging/network-link-conditioner-utility/
+    date: 2025-08-09
