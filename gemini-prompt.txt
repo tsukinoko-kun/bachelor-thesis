@@ -1,6 +1,6 @@
-Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe
-Aktuell zu überarbeitendes Kapitel: 4 (Kernherausforderungen)
-Dateiname aktuelles Kapitel: 004_core_challenges.typ
+Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe, Kernherausforderungen
+Aktuell zu überarbeitendes Kapitel: 5 (Stand der Technik)
+Dateiname aktuelles Kapitel: 005_current_technologies.typ
 Hinweis: Ich werde den gesamten Typst-Source als Rohtext anhängen.
       Verwende die Datei-Header der Form `// FILE: <filename>`,
       die durch die bereitgestellten Shell-Befehle eingefügt werden.
@@ -51,7 +51,12 @@ Fachspezifika / Typst / Zitationen:
   kennzeichnen).
 - Quellenzitate (z. B. [@key] o.ä.) dürfen nicht entfernt werden.
   Verschiebe Text nur zusammen mit den zugehörigen Zitaten.
-- Mathe: Fass die Formeln/Rechungen nicht an! Die sind so korrekt!
+- Mathe: Verändere keine Formeln/Gleicungen! Die sind so korrekt!
+  Alle mathematischen Darstellungen `$...$` dürfen auf keinen Fall
+  verändert werden!
+  Verändere keine Mathematik! `$...$`
+  Unter keinen Umständen! Niemals! Verändere keine Mathematik!
+  Das ist Typst, nicht LaTeX und auch nicht MathJax oder Markdown!
 - refs.yaml wird separat hochgeladen — nutze sie zur Prüfung der
   Zitate und korrigiere Zitatform, falls nötig.
 
@@ -73,7 +78,7 @@ Weitere Regeln:
 
 Output-Format (unbedingt einhalten):
 - Ausgabe = nur der überarbeitete Typst‑Source der Datei
-  `Dateiname aktuelles Kapitel` (z. B. 01_glossar.typst).
+  `Dateiname aktuelles Kapitel` (z. B. 01_glossar.typ).
 - Ausgabe = reiner Rohtext (kein Markdown‑Codeblock, keine Backticks,
   keine zusätzlichen Erläuterungen oder Metadaten).
 - Wenn du Korrekturen vornimmst, die überprüft werden sollten,
