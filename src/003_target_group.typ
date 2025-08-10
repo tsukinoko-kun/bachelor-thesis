@@ -1,51 +1,48 @@
 = Zielgruppe
 
-Um eine nutzerzentrierte Lösung zu entwickeln, wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von Videospielen zukünftig kostenfrei über eine vom Publisher oder Entwickler bereitgestellte Cloud-Gaming-Plattform zu spielen, anstatt sie auf der eigenen Hardware installieren zu müssen.
+Die Entwicklung einer erfolgreichen Technologieplattform setzt ein tiefes Verständnis der potenziellen Nutzer voraus. Dieses Kapitel widmet sich daher der Definition und Analyse der Zielgruppe für die konzipierte Cloud-Gaming-Lösung. Um ein empirisches Fundament für die nutzerzentrierte Auslegung der Systemarchitektur zu schaffen, wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von High-End-Spielen kostenfrei über eine Cloud-Plattform zu nutzen, anstatt sie lokal installieren zu müssen.
 
-Die Stichprobe umfasste 35 Personen, davon 32 aus Deutschland und drei aus den USA. Die Teilnehmerschaft setzte sich überwiegend aus Studierenden des Software-Engineerings sowie Personen anderer Berufs- und Altersgruppen zusammen. Die Teilnahme erfolgte freiwillig und ohne Anreize über das Online-Tool Blocksurvey.
+Die Stichprobe umfasste 35 Personen, mehrheitlich aus Deutschland (32) und ergänzt durch Teilnehmer aus den USA (3). Die Teilnahme erfolgte freiwillig über das Online-Tool Blocksurvey. Die Gruppe setzte sich primär aus Studierenden des Software-Engineerings sowie weiteren Personen unterschiedlicher Berufs- und Altersgruppen zusammen. Es ist anzumerken, dass diese Stichprobengröße keine repräsentative Aussage für die gesamte Spielerschaft zulässt. Die Ergebnisse liefern jedoch wertvolle qualitative Einblicke und deuten auf Tendenzen innerhalb einer technikaffinen Nutzergruppe hin.
 
-Die Ergebnisse zeigen, dass 80% der Befragten vorwiegend einen Desktop-PC als Spielplattform nutzen.
+Die Umfrageergebnisse zeichnen ein klares Bild der Spielgewohnheiten. Mit 80 % der Befragten, die vorwiegend einen Desktop-PC als Spielplattform nutzen, verortet sich die Zielgruppe klar im Segment der anspruchsvollen PC-Spieler.
 
 #figure(
   image("img/survey_devices.png"),
-  caption: "Umfrage - Auf welchem Gerät spielst du Videospiele?",
+  caption: "Umfrage: Auf welchem Gerät spielst du Videospiele?",
 )
 
-Hinsichtlich der Installationsgröße gaben 94.3% an, Spiele mit einem Speicherbedarf von 60 GB oder mehr zu nutzen. Bei 37.1% der Befragten überschreitet dieser sogar 100 GB.
-
-#figure(
-  image("img/survey_size.png"),
-  caption: "Umfrage - Wie groß sind die Spiele, die du spielst? (in GB)",
-)
-
-Eine deutliche Mehrheit bekundete zudem Interesse an AAA-Spielen. Laut den Angaben auf der Vertriebsplattform Steam stellen diese Titel in der Regel die höchsten Anforderungen an die Hardware (CPU, GPU) und den Festplattenspeicher. @godofwarragnark @finalfantasyviirebirth @thelastofuspart2remastered
+Dieses Bild wird durch das hohe Interesse an AAA-Spielen untermauert, welche bekanntermaßen die höchsten Anforderungen an Hardware und Speicherplatz stellen.
 
 #figure(
   image("img/interest_aaa.png"),
-  caption: "Umfrage - Interessierst du dich für AAA Games?",
+  caption: "Umfrage: Interessierst du dich für AAA-Spiele?",
 )
 
-Die Umfrage ergab weiterhin, dass die Mehrheit der Befragten bereits Erfahrungen mit Cloud-Gaming-Diensten gesammelt hat. Die Antwortoption "Andere" bezog sich dabei vornehmlich auf den Dienst Google Stadia, welcher zum 18.01.2023 eingestellt wurde. @stadia-faq-2023
+Die Präferenz für High-End-Titel spiegelt sich direkt im Speicherbedarf wider. Eine überwältigende Mehrheit von 94.3 % installiert Spiele, die 60 GB oder mehr belegen; bei über einem Drittel sind es sogar mehr als 100 GB. Dies unterstreicht die Relevanz von zwei zentralen Nachteilen traditioneller Demos: lange Downloadzeiten und erheblicher Speicherplatzbedarf.
+
+#figure(
+  image("img/survey_size.png"),
+  caption: "Umfrage: Wie groß sind die Spiele, die du spielst? (in GB)",
+)
+
+Die Vertrautheit mit Cloud-Gaming ist in der untersuchten Gruppe bereits hoch. Die Mehrheit hat Dienste wie GeForce Now oder das inzwischen eingestellte Google Stadia genutzt, was auf eine grundsätzliche Offenheit gegenüber Streaming-Lösungen hindeutet.
 
 #figure(
   image("img/survey_cloudgamingplattform.png"),
-  caption: "Umfrage - Welchen Cloud Gaming Anbieter hast du bereits verwendet?",
+  caption: "Umfrage: Welchen Cloud-Gaming-Anbieter hast du bereits verwendet?",
 )
 
-Die von den Teilnehmern angegebene Internetverbindung weist eine durchschnittliche Download-Geschwindigkeit von $325.4 frac("Mb", "s")$ (Median: $105 frac("Mb", "s")$) und eine durchschnittliche Latenz (Ping) von 28.88 ms (Median: 16 ms) auf.
+Zudem scheinen die technischen Voraussetzungen für ein qualitativ hochwertiges Streaming-Erlebnis mehrheitlich gegeben zu sein. Die von den Teilnehmenden angegebene Internetverbindung weist eine mediane Download-Geschwindigkeit von $105 frac("Mb", "s")$ und eine mediane Latenz von 16 ms auf. Diese Werte liegen deutlich über den üblichen Mindestanforderungen für Cloud-Gaming.
 
-Die zentrale Fragestellung der Umfrage bezog sich auf die Bereitschaft, Spieledemos via Cloud-Gaming zu nutzen. Eine deutliche Mehrheit von 68.6% befürwortete diesen Ansatz gegenüber dem lokalen Download. Weitere 11.4% zeigten sich unter Vorbehalt zustimmend, wobei die Akzeptanz von Faktoren wie dem Nutzungsaufwand (z.B. Registrierung, Wartezeiten) und der technischen Qualität, insbesondere der Latenz, abhängt.
+Die zentrale Fragestellung der Umfrage zielte auf die Akzeptanz von Spieledemos via Cloud-Gaming ab. Das Ergebnis ist eindeutig: Eine klare Mehrheit von 68.6 % würde eine solche Lösung dem herkömmlichen Download vorziehen.
 
 #figure(
   image("img/survey_clouddemo.png"),
-  caption: "Umfrage - Würdest du Demos über Cloud Gaming spielen, bevor du ein Spiel kaufst?",
+  caption: "Umfrage: Würdest du Demos über Cloud-Gaming spielen, bevor du ein Spiel kaufst?",
 )
 
-Basierend auf den Umfrageergebnissen lässt sich die Zielgruppe, eine Teilmenge der Gesamtspielerschaft, wie folgt charakterisieren:
+Weitere 11.4 % zeigen sich zustimmend, knüpfen ihre Bereitschaft jedoch an Bedingungen. Als entscheidende Faktoren wurden hier ein reibungsloser Zugang (etwa ohne umständliche Registrierung) und eine überzeugende technische Qualität, insbesondere eine geringe Latenz, genannt. Diese Vorbehalte sind als direkte Anforderungen an das Systemdesign zu verstehen.
 
-+ Überwiegende Nutzung von Desktop-PCs als primäre Spielplattform.
-+ Breites Interesse an Spielen unterschiedlicher Größe, mit einem explizit hohen Interesse an ressourcenintensiven AAA-Titeln.
-+ Vorhandene Erfahrungen mit Cloud-Gaming-Diensten.
-+ Hohe Bereitschaft, Spieledemos über Cloud-Gaming anstelle lokaler Installationen zu nutzen.
+Basierend auf diesen Ergebnissen lässt sich die Kernzielgruppe wie folgt charakterisieren: Es handelt sich um technikaffine PC-Spieler mit einem starken Interesse an grafisch aufwendigen AAA-Titeln. Sie sind mit den Herausforderungen großer Spieldateien und hoher Hardware-Anforderungen vertraut und haben mehrheitlich bereits Erfahrung mit Cloud-Gaming-Diensten gesammelt. Die hohe Bereitschaft, Demos direkt zu streamen, anstatt sie herunterzuladen, deutet auf einen pragmatischen Wunsch nach sofortigem Zugang und der Umgehung von Installationshürden hin.
 
-Das Ziel der vorliegenden Arbeit ist die Konzeption einer Cloud-Gaming-Lösung, die es Publishern sowie Self-Publishing-Entwicklern ermöglicht, Demos ihrer Spiele unkompliziert bereitzustellen. Hierfür wird zunächst der aktuelle Stand der Technik sowie bestehende Lösungsansätze analysiert. Aufbauend auf dieser Analyse wird ein Konzept entwickelt, das spezifische Herausforderungen wie die effiziente Bereitstellung von Demos und den Schutz des geistigen Eigentums adressiert. Dabei wird auf existierende Teillösungen zurückgegriffen, sofern diese für den Anwendungsfall geeignet sind.
+Dieses Nutzerprofil bestätigt die grundlegende Annahme der Arbeit: Es existiert ein relevanter Bedarf für eine niederschwellige Möglichkeit, High-End-Spiele auszuprobieren. Die im Folgenden vorgestellte Architektur ist darauf ausgelegt, genau diese Anforderungen (insbesondere sofortige Verfügbarkeit, hohe Performance und geringe Latenz) zu adressieren.

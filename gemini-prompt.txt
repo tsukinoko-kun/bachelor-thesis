@@ -1,6 +1,6 @@
-Bereits überarbeitete Kapitel: Glossar, Forschungsfragen
-Aktuell zu überarbeitendes Kapitel: 2 (Methodik und Vorgehensweise)
-Dateiname aktuelles Kapitel: 002_methods.typ
+Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe
+Aktuell zu überarbeitendes Kapitel: 4 (Kernherausforderungen)
+Dateiname aktuelles Kapitel: 004_core_challenges.typ
 Hinweis: Ich werde den gesamten Typst-Source als Rohtext anhängen.
       Verwende die Datei-Header der Form `// FILE: <filename>`,
       die durch die bereitgestellten Shell-Befehle eingefügt werden.
@@ -41,6 +41,7 @@ Sprachstil & Formulierung:
 - Ersetze vage Beispiele nur durch konkrete, realistische Details,
   sofern der Kontext dies zulässt; sonst als Vorschlag mit [CHECK_ME]
   kennzeichnen.
+- Verwende keinen Gedankenstrich –
 
 Fachspezifika / Typst / Zitationen:
 - Erhalte Typst‑Syntax: Keine Änderungen an Makros/Kommandos, die die
@@ -50,6 +51,7 @@ Fachspezifika / Typst / Zitationen:
   kennzeichnen).
 - Quellenzitate (z. B. [@key] o.ä.) dürfen nicht entfernt werden.
   Verschiebe Text nur zusammen mit den zugehörigen Zitaten.
+- Mathe: Fass die Formeln/Rechungen nicht an! Die sind so korrekt!
 - refs.yaml wird separat hochgeladen — nutze sie zur Prüfung der
   Zitate und korrigiere Zitatform, falls nötig.
 
