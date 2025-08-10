@@ -46,7 +46,7 @@ Testpersonen spielen zwei mal drei Minuten Cyberpunk 2077.
 Alle Testpersonen spielen einmal mit dem Streaming-Client (oben beschriebenes Setup) und einmal lokal ohne Streaming. Die Reihenfolge ist dabei zufällig und es wird nicht gesagt, ob gerade lokal oder per Stream gespielt wird. In beiden Fällen werden dieselben Peripheriegeräte (Maus, Tastatur, Bildschirm) verwendet. Per KVM-Switch wird zwischen den Beiden PCs umgeschaltet, ohne dass die Teilnehmer sehen welcher PC gerade verwendet wird.
 
 In beiden Fällen läuft das Spiel auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory.
-Die Gruppe, die mit Streaming spielt, verwendet dabei einen Windows Laptop mit AMD Ryzen 5 5500U und integrierter GPU.
+Die Gruppe, die mit Streaming spielt, verwendet dabei einen Windows Laptop mit AMD Ryzen 5 5500U und integrierter Radeon RX Vega 7 GPU.
 
 Alle Tests werden am selben Ort aber an unterschiedlichen Zeiten und Tagen durchgeführt.
 
@@ -172,3 +172,14 @@ Links ist lokal, rechts ist per Stream.
   ),
   caption: "Testpersonen will weiter spielen (hoher = besser)",
 )
+
+== Ergebnis
+
+Alle Tester haben den Test abgeschlossen.
+
+Durch die Testergebnisse kann man zu dem Schluss gelangen, dass das Streaming das Spielerlegnis leicht beeinträchtigt.
+Die Metriken liegen sehr nahe beieinander. Der offensichtlichste Unterschied liegt bei der Einschätzung für Bildqualität und Latenz. Das war zu erwarten, da diese beim Streaming objektiv schlechter sind als beim lokalen Spiel.
+
+Das Ziel dieses Tests ist es aber herauszufinden, ob das das Spielerlebnis mit Streaming negativ beeinträchtigt. Der Unterschied ist minimal aber sichtbar.
+
+Unerwartet ist, dass beim Streaming eine höhere Kaufwahrscheinlichkeit angegeben wurde. Dafür hat der Autor keine Erklärung. Durch die geringe Teilnehmerzahl kann man hier zu dem Schluss gelangen, dass die fehlende Statistische Signifikanz zu dem unerklärlichen Ergebnis geführt hat, da das gespiente Spiel viele zufällige Elemente beinhaltet.

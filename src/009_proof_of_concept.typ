@@ -136,7 +136,7 @@ appsink name=rtpsink
 
 === Testsystem
 
-Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem Windows Laptop mit AMD Ryzen 5 5500U und integrierter GPU als Client.
+Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem Windows Laptop mit AMD Ryzen 5 5500U und integrierter Radeon RX Vega 7 GPU als Client.
 
 == Spielereingaben
 
@@ -144,3 +144,8 @@ Für das Proof of Concept wurde sich auf eine Steuerung mit Maus und Tastatur ko
 
 WebRTC unterstützen Data-Channels, die beliebige Daten versenden können, die nicht zum eigentlichen Video-Stream gehören. @webrtc-data-channels
 Wenn die Verbindung über den Data-Channel nicht aufgebaut werden kann, wird WebSocket als Fallback verwendet.
+
+== Vereinfachung
+
+Für das Proof of Concept wurde auf Audio-Streaming und Begränzung der Aufnahme auf ein bestimmtes Fenster verzichtet. Diese Features sind erstmal nicht wichtig um zu sehen ob es prinzipiell funktioniert.
+

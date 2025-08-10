@@ -166,6 +166,7 @@
 #include "./src/009_proof_of_concept.typ"
 #include "./src/010_costs.typ"
 #include "./src/011_acceptance.typ"
+#include "./src/012_discussion.typ"
 #bibliography("refs.yaml")
 #include "src/danksagung.typ"
 #include "src/eidesstattliche-erklaerung.typ"
