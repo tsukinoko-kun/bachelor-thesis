@@ -1,27 +1,24 @@
 = Forschungsfragen
 
-Die vorliegende Arbeit verfolgt das Ziel, die Konzeption und Realisierbarkeit einer spezialisierten Cloud-Gaming-Plattform für Spieledemos zu untersuchen. Aus dieser Zielsetzung leitet sich die folgende Hauptforschungsfrage (HFF) ab:
+Den Ausgangspunkt dieser Arbeit bildet die Untersuchung der konzeptionellen und technischen Machbarkeit einer spezialisierten Cloud-Gaming-Plattform für Spieledemos. Aus dieser übergreifenden Zielsetzung leitet sich die folgende Hauptforschungsfrage (HFF) ab:
 
 #box(width: 100%, inset: 8pt, stroke: 1pt)[
   *HFF: Wie muss eine Cloud-Gaming-Plattform architektonisch und technologisch konzipiert sein, um High-End-Spieledemos performant auf Low-End-Geräten bereitzustellen, und welche Implikationen ergeben sich daraus für Nutzer sowie Betreiber?*
 ]
 
-Zur systematischen Beantwortung dieser übergeordneten Frage werden die folgenden untergeordneten Forschungsfragen (UFF) untersucht:
+Zur systematischen Beantwortung dieser Frage wird die Untersuchung in die folgenden untergeordneten Forschungsfragen (UFF) gegliedert:
 
-- *UFF 1: Welche Architekturmuster und Systemkomponenten eignen sich für die Realisierung einer spezialisierten Cloud-Gaming-Plattform, die auf die Bereitstellung von Spieledemos für leistungsschwache Endgeräte optimiert ist?*
-
-- *UFF 2: Durch welche Kombination von Streaming-Protokollen, Codecs und Infrastrukturtechnologien kann eine geringe Latenz und eine hohe visuelle Qualität bei der Übertragung von Spieledemos sichergestellt werden?*
-
-- *UFF 3: Welchen Mehrwert bietet eine solche Plattform für Endnutzer im Vergleich zu traditionellen Download-Demos, und welche technischen sowie nutzerzentrierten Hürden müssen für eine hohe Akzeptanz überwunden werden?*
-
-- *UFF 4: Welche betriebswirtschaftlichen Geschäftsmodelle sind für den Betrieb einer Cloud-Gaming-Plattform für Spieledemos tragfähig und welche strategischen Vorteile ergeben sich daraus für Spieleentwickler und Publisher?*
+- *UFF 1: Welche Architekturmuster und Systemkomponenten eignen sich, um eine auf die Bereitstellung von Spieledemos für leistungsschwache Endgeräte spezialisierte Cloud-Gaming-Plattform zu realisieren?*
+- *UFF 2: Wie lässt sich durch die Kombination spezifischer Streaming-Protokolle, Codecs und Infrastrukturtechnologien eine geringe Latenz bei gleichzeitig hoher visueller Qualität für die Übertragung von Spieledemos sicherstellen?*
+- *UFF 3: Worin besteht der Mehrwert einer solchen Plattform für Endnutzer im Vergleich zu traditionellen Download-Demos, und welche technischen sowie nutzerzentrierten Hürden könnten einer breiten Akzeptanz entgegenstehen?*
+- *UFF 4: Welche Geschäftsmodelle erscheinen für den Betrieb einer Cloud-Gaming-Plattform für Spieledemos tragfähig, und welche strategischen Vorteile könnten sich daraus für Spieleentwickler und Publisher ergeben?*
 
 == Hypothesen
 
-Vor jeglicher Recherche, stellte der Autor folgende Hypothesen auf:
+Ausgehend von einer ersten Einschätzung der Problemstellung und vor Beginn der systematischen Recherche wurden die folgenden Arbeitshypothesen formuliert. Diese dienten als anfängliche Leitlinien für die Untersuchung und wurden im Verlauf der Arbeit kritisch geprüft.
 
-- Ein großer Server sollte reichen, um mehrere Spiele gleichzeitig zu betreiben. Monolithische Architektur ist übersichtlich und einfach zu deployen.
-- WebRTC ist bekannt und weit verbreitet. Es ist eine gute Wahl für Low-Latency-Videostreaming.
-- Nutzer müssten mit Cloud-Gaming-Demos nicht auf Downloads warten und müssten die Hardwareanforderungen der Spiele nicht beachten. Nutzer sind davon abgeschreckt, zusätzliche Software installieren zu müssen oder sich einen Account anzulegen.
-- So eine Plattform muss kostenlos angeboten werden, um genutzt zu werden, da sie auf dem als kostenlos verbreiteten Prinzip von Demos basiert. Es kann als zusätzliche, teure Werbemaßnahme angesehen werden, dass die Plattform nicht wirtschaftlich ist (abhängig von der Konvertierungsrate).
-- Spieler werden diese Cloud-Gaming-Demos nicht mehr nutzen als die aktuell verbreiteten, lokal installierten Demos.
+- Eine monolithische Architektur, bei der mehrere Spielinstanzen auf einem einzelnen, leistungsstarken Server betrieben werden, stellt eine ausreichende und einfach zu verwaltende Lösung dar.
+- Das etablierte Protokoll WebRTC eignet sich aufgrund seiner weiten Verbreitung und der Fokussierung auf Echtzeitkommunikation gut für das Streaming der Spieledemos mit geringer Latenz.
+- Der Hauptvorteil für Nutzer liegt in der Eliminierung von Wartezeiten durch Downloads und der Unabhängigkeit von Hardwareanforderungen. Eine Hürde könnte jedoch die Notwendigkeit zur Installation zusätzlicher Software oder zur Erstellung eines Benutzerkontos sein.
+- Ein tragfähiges Geschäftsmodell muss auf einer kostenlosen Bereitstellung der Demos für Endnutzer basieren. Die Wirtschaftlichkeit der Plattform hängt somit maßgeblich von der Konversionsrate ab und könnte aus Betreibersicht als kostenintensive Marketingmaßnahme ohne direkten Profit betrachtet werden.
+- Die Akzeptanz und Nutzungshäufigkeit von Cloud-Gaming-Demos wird sich nicht signifikant von der etablierter, lokal installierter Demos unterscheiden.

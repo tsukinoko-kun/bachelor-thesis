@@ -1,0 +1,85 @@
+Bereits überarbeitete Kapitel: Glossar, Forschungsfragen
+Aktuell zu überarbeitendes Kapitel: 2 (Methodik und Vorgehensweise)
+Dateiname aktuelles Kapitel: 002_methods.typ
+Hinweis: Ich werde den gesamten Typst-Source als Rohtext anhängen.
+      Verwende die Datei-Header der Form `// FILE: <filename>`,
+      die durch die bereitgestellten Shell-Befehle eingefügt werden.
+refs.yaml: wird separat hochgeladen und ist als Hayagriva-YAML-
+           Bibliographie zu berücksichtigen.
+
+Aufgabe (kurz):
+1) Lies ALLE bereitgestellten Typst-Dateien (der gesamte Rohtext
+   mit `--- FILE: <filename> ---`-Headern) und refs.yaml vollständig,
+   um Gesamtkontext, Terminologie und Querverweise zu verstehen.
+2) Überarbeite AUSSCHLIESSLICH die Datei, die im Header unter
+   "Dateiname aktuelles Kapitel" genannt ist (z. B. 01_glossar.typst).
+   Ersetze deren gesamten Typst‑Source durch deine überarbeitete,
+   kompilierbare Version.
+3) Gib als EINZIGES Output den reinen Typst‑Source der überarbeiteten
+   Datei zurück (ROHTEXT). Verwende KEINE Markdown‑Fences oder
+   sonstige Umhüllungen — genau der Dateiinhalt, nichts weiter.
+
+Wesentliches Ziel:
+- Alle Informationen, Argumentationsketten und Nachvollziehbarkeit
+  müssen vollständig erhalten bleiben. Ergebnisse und Herleitungen
+  dürfen nicht verloren gehen.
+- Umstrukturieren des Kapitels ist erlaubt, Informationsverlust oder
+  fehlerhafte Neukonstruktion von Argumenten sind verboten.
+
+Sprachstil & Formulierung:
+- Orientiere dich an den bereits überarbeitete Kapitel.
+- Deutsch; wissenschaftlicher Stil, aber natürlicher und etwas weniger
+  geglättet. Ein leicht informeller Ton ist akzeptabel. Schreibe aus
+  der dritten Person.
+- Satzbau und Satzlängen variieren; Vermeidung monotoner Satzanfänge.
+- Baue moderate Unsicherheitsformulierungen ein, wo sachlich passend
+  (z. B. „das lässt darauf schließen, dass“, „könnte darauf hindeuten“,
+  „scheint“).
+- Füge sparsam Nuancen oder subtile Kritik hinzu, falls passend.
+- Vermeide ausgelutschte KI‑Buzzwords (z. B. „eintauchen“, „robust“,
+  „innovativ“).
+- Ersetze vage Beispiele nur durch konkrete, realistische Details,
+  sofern der Kontext dies zulässt; sonst als Vorschlag mit [CHECK_ME]
+  kennzeichnen.
+
+Fachspezifika / Typst / Zitationen:
+- Erhalte Typst‑Syntax: Keine Änderungen an Makros/Kommandos, die die
+  Kompilierbarkeit zerstören würden.
+- Codeblöcke, Kommandozeilenbeispiele und Konfigabschnitte bleiben
+  unverändert, außer bei notwendigen Korrekturen (dann als Kommentar
+  kennzeichnen).
+- Quellenzitate (z. B. [@key] o.ä.) dürfen nicht entfernt werden.
+  Verschiebe Text nur zusammen mit den zugehörigen Zitaten.
+- refs.yaml wird separat hochgeladen — nutze sie zur Prüfung der
+  Zitate und korrigiere Zitatform, falls nötig.
+
+Terminologie & Konsistenz:
+- Anglizismen und technische Begriffe sind zulässig; sorge für
+  einheitliche Schreibweisen im gesamten Dokument.
+- Scanne alle Kapitel (im angehängten Rohtext) nach terminologischen
+  Varianten; wähle für dieses Kapitel die dominante/frequenteste
+  Schreibweise. Bei Gleichstand: bevorzuge die in früheren Kapiteln
+  verwendete Form (chronologische Priorität).
+
+Weitere Regeln:
+- Erfinde keine neuen Fakten oder Daten. Keine ungesicherten Behauptungen.
+- Falls Konkretisierungen nötig sind, markiere sie deutlich mit
+  [CHECK_ME] oder als Typst‑Kommentar.
+- Lösche keine Sätze, die für Argumentation oder Nachvollziehbarkeit
+  relevant sind. Kürzen nur, wenn die Logik erhalten bleibt und
+  die Lesbarkeit deutlich steigt.
+
+Output-Format (unbedingt einhalten):
+- Ausgabe = nur der überarbeitete Typst‑Source der Datei
+  `Dateiname aktuelles Kapitel` (z. B. 01_glossar.typst).
+- Ausgabe = reiner Rohtext (kein Markdown‑Codeblock, keine Backticks,
+  keine zusätzlichen Erläuterungen oder Metadaten).
+- Wenn du Korrekturen vornimmst, die überprüft werden sollten,
+  markiere diese Stellen mit [CHECK_ME].
+
+Klärungsbedarf:
+- Falls du für eine präzise Überarbeitung fehlende Kontextelemente
+  oder unauflösbare Ambiguitäten findest, stelle GENAU EINE kurze
+  Frage (auf Deutsch), damit ich sie beantworte.
+
+## HIER KOMMT DER KOMPLETTE TYPST-SOURCE (Rohtext):
