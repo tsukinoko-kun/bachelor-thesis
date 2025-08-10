@@ -1,8 +1,10 @@
 = Akzeptanz
 
-== Latenz
+Nachdem die technische Machbarkeit und die wirtschaftlichen Rahmenbedingungen der Plattform analysiert wurden, widmet sich dieses Kapitel der Nutzerakzeptanz. Eine hohe Akzeptanz ist entscheidend für den Erfolg des Konzepts, da eine als unzureichend empfundene technische Qualität potenzielle Käufer eher abschrecken als überzeugen würde. Im Mittelpunkt der Untersuchung steht daher die Frage, wie sich die durch das Streaming bedingten Kompromisse bei Latenz und Bildqualität auf das subjektive Spielerlebnis auswirken.
 
-Die gemessene Latenz von Heilbronn zum AWS-Rechenzentrum in Frankfurt (EU Central 1) beträgt:
+== Latenz als kritischer Faktor
+
+Die Ende-zu-Ende-Latenz ist einer der wichtigsten Parameter für die Qualität eines Cloud-Gaming-Dienstes. Um eine realistische Grundlage für die Akzeptanztests zu schaffen, wurde zunächst die Netzwerklatenz zwischen einem typischen Nutzerstandort (Heilbronn) und dem anvisierten AWS-Rechenzentrum in Frankfurt (`eu-central-1`) gemessen.
 
 ```shell
 $ ping -c 20 ec2.eu-central-1.amazonaws.com
@@ -28,66 +30,22 @@ $ ping -c 20 ec2.eu-central-1.amazonaws.com
 64 bytes from 52.94.137.27: icmp_seq=19 ttl=243 time=16.652 ms
 ```
 
-- Median: 14.392 ms
-- Durchschnitt: 15.229 ms
-- Standardabweichung: 1.644 ms
+Die Messung ergibt eine mediane Round-Trip-Time (RTT) von 14.4 ms und einen Durchschnittswert von 15.2 ms. Unter der Annahme, dass die Datenrate des Streams von rund $13 frac("Mbit", "s")$ die Router-Puffer nicht signifikant belastet, kann von einer stabilen Netzwerklatenz ausgegangen werden. Für den nachfolgenden Test wird daher eine RTT von ca. 30 ms als realistische, leicht konservative Annahme für die Verbindung zwischen Client und Server zugrunde gelegt.
 
-Die Datenrate von etwa $13 frac("Mbit", "s")$ liegt weit unter der maximalen Link‑Kapazität und sollte keine Router‑Puffer füllen. Daher ist zu erwarten, dass die RTT nicht von der Datenrate $13 frac("Mbit", "s")$ beeinträchtigt wird.
+== Studiendesign und Durchführung
 
-Man kann also die vereinfachte Annahme treffen, dass die RTT etwa 30 ms beträgt.
+Um die Nutzerakzeptanz unter kontrollierten Bedingungen zu evaluieren, wurde ein verblindeter Test mit 10 Teilnehmenden durchgeführt. Jede Person spielte zwei dreiminütige Abschnitte des Spiels _Cyberpunk 2077_. Die Reihenfolge der beiden Testbedingungen war dabei zufällig:
 
-Daher wird ein Akzeptanztest durchgeführt, der die Bedingungen von Streaming zu AWS EU Central 1 nachstellt ohne das volle Cloud-Setup zu benötigen.
+1. *Lokales Spielerlebnis:* Das Spiel lief direkt auf einem leistungsstarken Host-Rechner (MacBook Pro M4 Max).
+2. *Streaming-Erlebnis:* Das Spiel lief auf demselben Host-Rechner, wurde aber mittels des im Proof of Concept entwickelten Dienstes auf einen leistungsschwächeren Client-Laptop (AMD Ryzen 5 5500U) gestreamt.
 
-== Testumgebung
+Um die zuvor ermittelte Netzwerklatenz zu simulieren, wurde die Verbindung zwischen Host und Client mithilfe eines Network Link Conditioners @network-link-conditioner künstlich auf eine RTT von 30 ms gedrosselt. Die Teilnehmenden wussten nicht, welche der beiden Bedingungen gerade aktiv war. Ein KVM-Switch ermöglichte einen nahtlosen Wechsel zwischen den Systemen, wobei dieselben Peripheriegeräte (Maus, Tastatur, Monitor) verwendet wurden.
 
-Das Proof-of-Concept Programm wird lokal (zwei PCs im selben Netzwerk mit STUN/TURN server für lokales Netzwerk) ausgeführt und die Latenz wird künstlich per Network Link Conditioner @network-link-conditioner auf etwa 30 ms erhöht.
+Nach jedem der beiden Abschnitte wurden die Teilnehmenden gebeten, ihre Erfahrung anhand einer Fünf-Punkte-Likert-Skala zu bewerten. Erhoben wurden die Kaufwahrscheinlichkeit, die Störung durch Eingabeverzögerung, die wahrgenommene Bildqualität und der allgemeine Spielspaß. Als objektive Leistungskennzahl wurde die Anzahl der besiegten Gegner erfasst.
 
-Testpersonen spielen zwei mal drei Minuten Cyberpunk 2077.
-Alle Testpersonen spielen einmal mit dem Streaming-Client (oben beschriebenes Setup) und einmal lokal ohne Streaming. Die Reihenfolge ist dabei zufällig und es wird nicht gesagt, ob gerade lokal oder per Stream gespielt wird. In beiden Fällen werden dieselben Peripheriegeräte (Maus, Tastatur, Bildschirm) verwendet. Per KVM-Switch wird zwischen den Beiden PCs umgeschaltet, ohne dass die Teilnehmer sehen welcher PC gerade verwendet wird.
+== Auswertung der Ergebnisse
 
-In beiden Fällen läuft das Spiel auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory.
-Die Gruppe, die mit Streaming spielt, verwendet dabei einen Windows Laptop mit AMD Ryzen 5 5500U und integrierter Radeon RX Vega 7 GPU.
-
-Alle Tests werden am selben Ort aber an unterschiedlichen Zeiten und Tagen durchgeführt.
-
-Es wird per Videoaufzeichnung die Anzahl besiegter Gegner gezählt.
-
-Einstiegserklärung für Teilnehmer: #quote[
-  Du spielst zwei kurze Abschnitte aus Cyberpunk 2077, je 3 Minuten. Die Reihenfolge ist zufällig. Spiel bitte so wie üblich. Nach jedem Abschnitt kommen kurze Fragen. Es gibt keine richtigen oder falschen Antworten. Wenn technische Probleme auftauchen, sag mir Bescheid.
-]
-
-== Zwischenfragen nach jedem Abschnitt
-
-+ Wie wahrscheinlich ist es, dass du das Spiel kaufen würdest, wenn die Vollversion jetzt verfügbar wäre?
-  Skala 1–5
-  1 = sehr unwahrscheinlich, 5 = sehr wahrscheinlich
-+ Wie stark hat dich die Eingabeverzögerung (Input‑Lag / Steuergefühl) während dieses Abschnitts gestört?
-  Skala 1–5
-  1 = überhaupt nicht, 5 = sehr stark
-+ Wie würdest du die Bildqualität bewerten (Schärfe, Artefakte, Ruckeln)?
-  Skala 1–5
-  1 = sehr schlecht, 5 = sehr gut
-+ Wie viel Spaß hattest du in diesem Abschnitt?
-  Skala 1–5
-  1 = gar keinen Spaß, 5 = sehr viel Spaß
-+ Würdest du nach diesem Abschnitt weiterspielen?
-  Ja / Nein
-
-== Abschlussfragebogen nach beiden Abschnitten
-
-+ Welcher Abschnitt war für dich insgesamt am angenehmsten / am kaufentscheidendsten?
-  Abschnitt 1 / Abschnitt 2 / Keine Präferenz
-  Hinweis: Abschnittsnummern entsprechen der Reihenfolge, die du gespielt hast.
-+ In welchem Abschnitt wärst du am ehesten bereit gewesen, das Spiel zu kaufen?
-  Abschnitt 1 / Abschnitt 2 / Keine Präferenz
-+ Hast du schon Erfahrung mit Cloud‑Gaming (z. B. Stadia, Geforce Now, etc.)?
-  Ja / Nein
-
-== Ergebnisse
-
-Es haben 10 Testpersonen teilgenommen.
-
-Links ist lokal, rechts ist per Stream.
+Die erhobenen Daten wurden mittels Boxplots visualisiert, um die Verteilung der Bewertungen für das lokale und das gestreamte Spielerlebnis zu vergleichen.
 
 #import "@preview/lilaq:0.4.0" as lq
 
@@ -101,8 +59,10 @@ Links ist lokal, rechts ist per Stream.
       x: 2,
     ),
   ),
-  caption: "Besiegte Gegner (hoher = besser)",
+  caption: "Besiegte Gegner (höher = besser)",
 )
+
+Die objektive Leistung, gemessen an der Anzahl besiegter Gegner, scheint beim Streaming leicht geringer auszufallen. Der Median der besiegten Gegner ist im Streaming-Szenario niedriger, was auf eine mögliche Beeinträchtigung der Reaktionsfähigkeit durch die Latenz hindeuten könnte.
 
 #figure(
   lq.diagram(
@@ -114,8 +74,10 @@ Links ist lokal, rechts ist per Stream.
       x: 2,
     ),
   ),
-  caption: "Kaufwahrscheinlichkeit (hoher = besser)",
+  caption: "Kaufwahrscheinlichkeit (höher = besser, Skala 1-5)",
 )
+
+Unerwarteterweise zeigt sich bei der Kaufwahrscheinlichkeit kein klarer Nachteil für das Streaming. Die Mediane beider Gruppen liegen auf demselben Niveau. Dieses Ergebnis sollte jedoch aufgrund der geringen Stichprobengröße mit Vorsicht interpretiert werden.
 
 #figure(
   lq.diagram(
@@ -127,8 +89,10 @@ Links ist lokal, rechts ist per Stream.
       x: 2,
     ),
   ),
-  caption: "Einschätzung Eingabeverzögerung (hoher = schlechter)",
+  caption: "Einschätzung Eingabeverzögerung (höher = schlechter, Skala 1-5)",
 )
+
+Wie zu erwarten war, wurde die Eingabeverzögerung beim Streaming als störender empfunden. Der Median der Bewertung liegt hier bei 2, während er beim lokalen Spielen bei 1 liegt, was einer kaum wahrnehmbaren Latenz entspricht.
 
 #figure(
   lq.diagram(
@@ -140,8 +104,10 @@ Links ist lokal, rechts ist per Stream.
       x: 2,
     ),
   ),
-  caption: "Einschätzung Bildqualität (hoher = besser)",
+  caption: "Einschätzung Bildqualität (höher = besser, Skala 1-5)",
 )
+
+Auch die Bildqualität wurde beim Streaming erwartungsgemäß etwas schlechter bewertet. Die durch die Videokompression entstehenden Artefakte und die geringere Schärfe führen zu einem niedrigeren Medianwert (4) im Vergleich zum lokalen Spielerlebnis (5).
 
 #figure(
   lq.diagram(
@@ -153,8 +119,10 @@ Links ist lokal, rechts ist per Stream.
       x: 2,
     ),
   ),
-  caption: "Spielspaß (hoher = besser)",
+  caption: "Spielspaß (höher = besser, Skala 1-5)",
 )
+
+Trotz der messbaren technischen Nachteile scheint der subjektive Spielspaß kaum beeinträchtigt zu werden. Die Mediane beider Gruppen liegen sehr nahe beieinander, was darauf hindeutet, dass die negativen Effekte nicht ausreichten, um das grundlegende Vergnügen am Spiel signifikant zu schmälern.
 
 #figure(
   lq.diagram(
@@ -170,16 +138,17 @@ Links ist lokal, rechts ist per Stream.
       (8, 9),
     ),
   ),
-  caption: "Testpersonen will weiter spielen (hoher = besser)",
+  caption: "Anzahl der Testpersonen, die weiterspielen würden",
 )
 
-== Ergebnis
+Dieses Bild bestätigt sich bei der Frage, ob die Teilnehmenden nach dem Abschnitt weiterspielen würden. In beiden Gruppen war die Bereitschaft hierzu sehr hoch und nahezu identisch.
 
-Alle Tester haben den Test abgeschlossen.
+== Interpretation und Fazit
 
-Durch die Testergebnisse kann man zu dem Schluss gelangen, dass das Streaming das Spielerlegnis leicht beeinträchtigt.
-Die Metriken liegen sehr nahe beieinander. Der offensichtlichste Unterschied liegt bei der Einschätzung für Bildqualität und Latenz. Das war zu erwarten, da diese beim Streaming objektiv schlechter sind als beim lokalen Spiel.
+Die Ergebnisse des Akzeptanztests zeichnen ein differenziertes Bild. Einerseits führt die Streaming-Lösung zu objektiv messbaren und subjektiv wahrgenommenen Einbußen bei der Leistung, der Eingabeverzögerung und der Bildqualität. Diese Nachteile waren aufgrund der technischen Gegebenheiten zu erwarten.
 
-Das Ziel dieses Tests ist es aber herauszufinden, ob das das Spielerlebnis mit Streaming negativ beeinträchtigt. Der Unterschied ist minimal aber sichtbar.
+Andererseits deuten die zentralen Metriken für die Nutzererfahrung – der Spielspaß und die Bereitschaft, weiterzuspielen – darauf hin, dass diese Einbußen das Gesamterlebnis nicht entscheidend beeinträchtigen. Für den Anwendungsfall einer kurzen Spieledemo scheint die erreichte Qualität "gut genug" zu sein, um einen positiven Eindruck des Spiels zu vermitteln.
 
-Unerwartet ist, dass beim Streaming eine höhere Kaufwahrscheinlichkeit angegeben wurde. Dafür hat der Autor keine Erklärung. Durch die geringe Teilnehmerzahl kann man hier zu dem Schluss gelangen, dass die fehlende Statistische Signifikanz zu dem unerklärlichen Ergebnis geführt hat, da das gespiente Spiel viele zufällige Elemente beinhaltet.
+Das unerwartete Ergebnis bei der Kaufwahrscheinlichkeit lässt sich angesichts der geringen Teilnehmerzahl und der zufälligen Elemente im Spielgeschehen am ehesten als statistisches Rauschen interpretieren und besitzt keine Aussagekraft.
+
+Zusammenfassend lässt sich festhalten, dass die entwickelte Streaming-Lösung eine hohe Nutzerakzeptanz erwarten lässt. Die Vorteile des sofortigen Zugangs ohne Download und Installation scheinen die leichten technischen Kompromisse für die Dauer einer Demo-Session aufzuwiegen. Dies stützt die Hypothese, dass eine solche Plattform einen echten Mehrwert für Spieler bieten kann.
