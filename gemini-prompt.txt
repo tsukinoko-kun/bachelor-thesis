@@ -1,6 +1,6 @@
-Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe, Kernherausforderungen, Stand der Technik, Basistechnologien für den verfolgten Ansatz, Architektur, Implementierung
-Aktuell zu überarbeitendes Kapitel: 9 (Proof of Concept)
-Dateiname aktuelles Kapitel: 009_proof_of_concept.typ
+Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe, Kernherausforderungen, Stand der Technik, Basistechnologien für den verfolgten Ansatz, Architektur, Implementierung, Proof of Concept, Kosten
+Aktuell zu überarbeitendes Kapitel: 11 (Akzeptanz)
+Dateiname aktuelles Kapitel: 011_acceptance.typ
 Hinweis: Ich werde den gesamten Typst-Source als Rohtext anhängen.
       Verwende die Datei-Header der Form `// FILE: <filename>`,
       die durch die bereitgestellten Shell-Befehle eingefügt werden.
@@ -17,7 +17,7 @@ Aufgabe (kurz):
    kompilierbare Version.
 3) Gib als EINZIGES Output den reinen Typst‑Source der überarbeiteten
    Datei zurück (ROHTEXT). Verwende KEINE Markdown‑Fences oder
-   sonstige Umhüllungen — genau der Dateiinhalt, nichts weiter.
+   sonstige Umhüllungen. Genau der Dateiinhalt, nichts weiter.
 
 Wesentliches Ziel:
 - Alle Informationen, Argumentationsketten und Nachvollziehbarkeit
@@ -57,7 +57,8 @@ Fachspezifika / Typst / Zitationen:
   Verändere keine Mathematik! `$...$`
   Unter keinen Umständen! Niemals! Verändere keine Mathematik!
   Das ist Typst, nicht LaTeX und auch nicht MathJax oder Markdown!
-- refs.yaml wird separat hochgeladen — nutze sie zur Prüfung der
+  Und schreibe die Formeln erst recht nicht in Klammern!
+- refs.yaml wird separat hochgeladen, nutze sie zur Prüfung der
   Zitate und korrigiere Zitatform, falls nötig.
 
 Terminologie & Konsistenz:
