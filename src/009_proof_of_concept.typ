@@ -1,56 +1,29 @@
 = Proof of Concept
 
-Im folgenden wird ein Proof of Concept des Streaming Services mit WebRTC implementiert.
+Zur Validierung des im vorherigen Kapitel konzipierten Streaming-Dienstes wurde ein Proof of Concept (PoC) implementiert. Dieses Kapitel dokumentiert die technische Umsetzung der Kernkomponenten, die für eine latenzarme Übertragung des Spielgeschehens verantwortlich sind. Der Fokus liegt dabei auf der Auswahl des Media-Frameworks, der plattformspezifischen Konfiguration der Video-Pipeline und der Übertragung von Steuerungseingaben.
 
 == Videoaufzeichnung und Stream-Kodierung
 
-Gängige Tools für diesen Zweck sind: #link("https://ffmpeg.org/")[FFmpeg] und #link("https://gstreamer.freedesktop.org/")[GStreamer].
+Eine zentrale Anforderung ist die Fähigkeit, den Bildschirminhalt oder ein spezifisches Anwendungsfenster mitsamt Ton zuverlässig aufzuzeichnen und für das Streaming zu kodieren. Zwei etablierte Open-Source-Frameworks kommen für diese Aufgabe infrage: #link("https://ffmpeg.org/")[FFmpeg] und #link("https://gstreamer.freedesktop.org/")[GStreamer].
 
-Diese Arbeit benötigt ein Tool, dass verlässlich den kompletten Bildschirm oder ein einzelnes Fenster mit Ton aufnehmen kann.
+Während FFmpeg für seine umfassende Unterstützung einer breiten Palette von Formaten und Codecs bekannt ist @ffmpeg-formats, liegt der Designfokus von GStreamer auf der Erstellung modularer, latenzarmer Multimedia-Pipelines und der tiefen Integration von Hardware-Beschleunigung @gstreamer-vs-ffmpeg. Da für den anvisierten Anwendungsfall des Cloud-Gamings die Minimierung der Latenz von entscheidender Bedeutung ist und die breite Formatunterstützung von FFmpeg nicht benötigt wird, fiel die Wahl auf GStreamer.
 
-Während FFmpeg auf eine große Menge an unterstützten Formaten ausgelegt ist @ffmpeg-formats, ist GStreamer auf geringe Latenz und Hardware Acceleration ausgelegt @gstreamer-vs-ffmpeg.
+== Plattformspezifische Pipeline-Konfiguration
 
-Mit dem Zeil die geringstmögliche Latenz zu erzielen, wurde GStreamer gewählt.
-Die vielen Formate, die FFmpeg unterstützt, wurden nicht benötigt.
+Um die bestmögliche Performance zu erzielen, ist die Nutzung von Hardware-Beschleunigung für die Videokodierung unerlässlich. Dies erfordert die Erstellung spezifischer GStreamer-Pipelines, die auf die jeweiligen Grafik-APIs und Treiber der Zielbetriebssysteme (Linux, macOS, Windows) zugeschnitten sind.
 
-== Plattformoptimierung
+Zur Ermittlung der optimalen Parameter für die GStreamer-Elemente wurde ein auf der offiziellen GStreamer-Dokumentation trainiertes Retrieval-Augmented Generation (RAG) Modell auf Basis von Gemini 2.5 Pro konsultiert. Die Fragestellung zielte auf die bestmögliche Konfiguration für einen Low-Latency-Stream ab, der für moderne Webbrowser als Client-Plattform bestimmt ist. Die daraus resultierenden Vorschläge dienten als Grundlage für die hier vorgestellten Pipelines.
 
-Um Hardware Acceleration nutzen zu können, müssen für jede Plattform unterschiedliche Optionen für GStreamer mitgegeben werden.
-Die genaue Bedeutung kann in der Dokumentation von GStreamer nachgelesen werden.
-
-Die Parameter wurden ausgewählt, indem ein Gemini 2.5 Pro RAG (Retrieval-Augmented Generation) mit der Dokumentation von GStreamer erstellt und nach optimalen Einstellungen für den Anwendungsfall Low-Latency-Stream mit modernen Browsern als Zielplattform gefragt wurde.
-
-Das Betriebssystem (Linux, Mac, Windows) wird über conditional-compilation ausgewählt.
-Auf Linux wird zur Laufzeit bestimmt, ob Wayland oder X11 verwendet wird.
+Die Auswahl der korrekten Pipeline erfolgt zur Kompilierzeit basierend auf dem Zielbetriebssystem. Unter Linux wird zur Laufzeit zusätzlich geprüft, ob Wayland oder X11 als Display-Server aktiv ist.
 
 === Linux
 
 ==== X11
+Die Pipeline für X11 nutzt `ximagesrc` zur Erfassung des Bildschirminhalts. Die Option `use-damage=false` wird gesetzt, da Hardware-Encoder wie `nvh264enc` vollständige Frames erwarten und keine partiellen Updates verarbeiten können. Ein Caps-Filter (`video/x-raw,framerate=60/1`) erzwingt eine konstante Bildrate von 60 FPS.
 
-*ximagesrc* ist eine X11-Quelle, die ein Bild von dem X11-Display erfasst.
-Damage wird nicht verwendet, weil Hardware-Encoder wie nvh264enc komplette Frames erwarten.
+Die nachfolgenden Elemente `videoconvert` und `nvideoconvert` übernehmen die CPU- und GPU-seitige Konvertierung des Bildmaterials in das für den NVIDIA-Hardware-Encoder erforderliche NVMM-Speicherformat. Der Encoder `nvh264enc` wird mit Parametern konfiguriert, die auf eine hohe Qualität bei minimaler Latenz abzielen (`preset=low-latency-hq`, `tune=zerolatency`). Der Rate-Control-Modus `cbr-ld-hq` (Constant Bitrate, Low Delay, High Quality) sorgt für einen stabilen Videostream mit einer Zielbitrate von $12000 frac("kb", "s")$.
 
-*video/x-raw,framerate=60/1* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
-
-*videoconvert* ist eine CPU-basierte Farb- und Format-Konvertierung (z.B. BGRx → I420).
-
-*nvideoconvert* ist eine NVIDIA-spezifische Konvertierung ins “NVMM”-Speicherformat (für Hardware-Encoder).
-
-*video/x-raw(memory:NVMM),width=1920,height=1080* kodiert den im NVIDIA-Video-Memory (NVMM) vorliegenden Videostream zu Full HD (1920x1080) um.
-
-*nvh264enc* ist ein NVIDIA-spezifischer Encoder, der einen H.264-Stream ausgibt.
-*preset=low-latency-hq* optimiert für hohe Qualität bei möglichst geringer Latenz.
-*tune=zerolatency* verhindert B-Frame Reordering/Buffern.
-*rc-mode=cbr-ld-hq* CBR (Constant Bitrate), Low Delay, High Quality.
-*bitrate=12000* setzt die Zielbitrate auf $12000 frac("kb", "s")$.
-
-*h264parse* Parsen und ggf. Neuformatieren (Announce von SPS/PPS, NALU-Größen etc.).
-
-*rtph264pay* RTP-Packetizer für H.264.
-*config-interval=1* Sendet SPS/PPS (Decoder-Konfigurationsdaten) alle 1 Sekunde neu.
-*pt=96* Dynamischer RTP-Payload-Type 96.
-
-*appsink* ist ein Sink-Element, das die Daten an die Applikation (in diesem Fall den Go-Code) übergibt. Der Name *rtpsink* wird verwendet, um das Element im Code zu referenzieren.
+Schließlich bereiten `h264parse` und `rtph264pay` den H.264-Stream für die Übertragung über RTP vor, indem sie ihn paketieren und regelmäßig Konfigurationsdaten (SPS/PPS) senden. Das `appsink`-Element mit dem Namen `rtpsink` dient als Endpunkt der Pipeline und übergibt die RTP-Pakete an die Go-Anwendung zur Weiterleitung via WebRTC.
 
 ```
 ximagesrc use-damage=false !
@@ -65,12 +38,7 @@ appsink name=rtpsink
 ```
 
 ==== Wayland
-
-*pipewiresrc* ist die standard Wayland-Quelle.
-
-*video/x-raw,format=BGRx,framerate=60/1* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
-
-Ab hier ist die Pipeline wie bei X11 beschrieben.
+Unter Wayland wird `pipewiresrc` als standardisierte Quelle für die Bildschirmaufnahme verwendet. Abgesehen von diesem Eingabeelement ist die restliche Pipeline identisch zu der für X11, da die nachfolgende Verarbeitung auf der GPU stattfindet und vom Display-Server unabhängig ist.
 
 ```
 pipewiresrc !
@@ -84,23 +52,10 @@ rtph264pay config-interval=1 pt=96 !
 appsink name=rtpsink
 ```
 
-=== Mac
+=== macOS
+Auf macOS kommt die `avfvideosrc`-Quelle zum Einsatz, die auf dem nativen AVFoundation-Framework basiert. Die Auflösung wird mittels `videoscale` auf eine Standardauflösung von 1920x1080 Pixel skaliert.
 
-*avfvideosrc* AVFoundation-Source auf macOS, nimmt den Bildschirm auf.
-
-*video/x-raw,framerate=60/1* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
-
-*videoscale* CPU-basiertes Skalieren des Bildes.
-
-*video/x-raw,width=1920,height=1080* Setzt die Ausgabeauflösung auf 1920×1080 Pixel.
-
-*vtenc_h264_hw* Apple VideoToolbox H.264 Hardware-Encoder.
-*realtime=true* Optimiert für minimale Latenz (verringert interne Pufferung).
-*allow-frame-reordering=false* Deaktiviert B-Frame-Reihenfolge → nur I- und P-Frames → weniger Decoder-Delay.
-*bitrate=10000* setzt die Zielbitrate auf $10000 frac("kb", "s")$.
-*max-keyframe-interval=60* Maximal alle 60 Frames ein Keyframe (bei 60 fps → 1 Keyframe/s).
-
-Ab `h264parse` ist die Pipeline wie bei Linux X11 beschrieben.
+Die Hardware-Kodierung erfolgt durch `vtenc_h264_hw`, den Encoder des Apple VideoToolbox-Frameworks. Die Parameter `realtime=true` und `allow-frame-reordering=false` sind entscheidend, um interne Puffer zu minimieren und die Latenz zu reduzieren. Die Zielbitrate wird auf $10000 frac("kb", "s")$ gesetzt. Die restlichen Elemente der Pipeline entsprechen denen der Linux-Version.
 
 ```
 avfvideosrc capture-screen=true !
@@ -114,19 +69,13 @@ appsink name=rtpsink
 ```
 
 === Windows
+Für Windows wird die `d3d11screencapturesrc` verwendet, eine performante Quelle, die direkt auf der Direct3D-11-API aufsetzt und die Bilddaten im GPU-Speicher belässt. Dies macht eine explizite Konvertierung wie bei der X11-Pipeline überflüssig und reduziert die CPU-Last.
 
-*d3d11screencapturesrc* Direct3D-11–basierte Bildschirmquelle unter Windows.
-Liefert Frames direkt aus der GPU in D3D11-Speicher
-
-*video/x-raw(memory:D3D11Memory), framerate=60/1,width=1920,height=1080* ist ein Caps-Filter, der unkomprimierte, Rohe Frames mit 60Hz ausgibt.
-
-*d3d11convert* Konvertiert D3D11-Oberflächen (Farbformat/Pixel-Layout) in ein Format, das downstream weiterverarbeitet werden kann.
-
-Ab `nvh264enc` ist die Pipeline wie bei Linux X11 beschrieben.
+Das `d3d11convert`-Element sorgt für die notwendige Farbformatkonvertierung innerhalb des D3D11-Speichers. Ab dem `nvh264enc`-Encoder ist die Pipeline wieder identisch zur Linux-Variante, da sie auf den plattformübergreifenden NVIDIA-Treiber aufsetzt.
 
 ```
 d3d11screencapturesrc !
-video/x-raw(memory:D3D11Memory), framerate=60/1,width=1920,height=1080 !
+'video/x-raw(memory:D3D11Memory), framerate=60/1,width=1920,height=1080' !
 d3d11convert !
 nvh264enc preset=low-latency-hq tune=zerolatency rc-mode=cbr-ld-hq bitrate=12000 !
 h264parse !
@@ -134,18 +83,12 @@ rtph264pay config-interval=1 pt=96 !
 appsink name=rtpsink
 ```
 
-=== Testsystem
+== Übertragung der Steuerungseingaben
 
-Getestet wurde auf einem MacBook Pro M4 Max mit 16-core CPU und 64GB unified memory als Server und einem Windows Laptop mit AMD Ryzen 5 5500U und integrierter Radeon RX Vega 7 GPU als Client.
+Für die Übertragung der Spielereingaben (Maus und Tastatur) vom Client zum Server werden die von WebRTC bereitgestellten Data Channels genutzt @webrtc-data-channels. Diese ermöglichen den Versand beliebiger Daten parallel zum Audio- und Videostream. Sie können für eine geringe Latenz konfiguriert werden (unzuverlässig und ungeordnet), was für die Übermittlung von Eingabedaten ideal ist. Sollte der Aufbau eines Data Channels, beispielsweise aufgrund restriktiver Netzwerk-Firewalls, fehlschlagen, wird als Fallback-Lösung eine WebSocket-Verbindung etabliert.
 
-== Spielereingaben
+== Fokus des Proof of Concept und Testumgebung
 
-Für das Proof of Concept wurde sich auf eine Steuerung mit Maus und Tastatur konzentriert. Später andere Eingabegeräte wie Gamepads einzufügen wäre kein Problem.
+Um die Komplexität des PoC zu reduzieren und sich auf die Validierung der Kernfunktionalität – die latenzarme Videoübertragung – zu konzentrieren, wurden bewusst einige Vereinfachungen vorgenommen. Auf das Streaming von Audiodaten sowie auf die Möglichkeit, die Aufnahme auf ein einzelnes Anwendungsfenster zu beschränken, wurde verzichtet. Diese Funktionen sind für die grundsätzliche Machbarkeitsprüfung nicht essenziell.
 
-WebRTC unterstützen Data-Channels, die beliebige Daten versenden können, die nicht zum eigentlichen Video-Stream gehören. @webrtc-data-channels
-Wenn die Verbindung über den Data-Channel nicht aufgebaut werden kann, wird WebSocket als Fallback verwendet.
-
-== Vereinfachung
-
-Für das Proof of Concept wurde auf Audio-Streaming und Begränzung der Aufnahme auf ein bestimmtes Fenster verzichtet. Diese Features sind erstmal nicht wichtig um zu sehen ob es prinzipiell funktioniert.
-
+Die Tests wurden in einer heterogenen Umgebung durchgeführt, die ein typisches Nutzungsszenario widerspiegelt. Als Server diente ein MacBook Pro (M4 Max, 16-Core CPU, 64 GB RAM), während als Client ein Windows-Laptop mit einer AMD Ryzen 5 5500U CPU und integrierter Radeon RX Vega 7 GPU zum Einsatz kam. Diese Konfiguration dient als Grundlage für die im folgenden Kapitel beschriebenen Akzeptanztests.

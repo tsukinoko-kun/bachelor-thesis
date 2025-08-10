@@ -1,6 +1,6 @@
-Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe, Kernherausforderungen
-Aktuell zu überarbeitendes Kapitel: 5 (Stand der Technik)
-Dateiname aktuelles Kapitel: 005_current_technologies.typ
+Bereits überarbeitete Kapitel: Glossar, Forschungsfragen, Methodik und Vorgehensweise, Zielgruppe, Kernherausforderungen, Stand der Technik, Basistechnologien für den verfolgten Ansatz, Architektur, Implementierung
+Aktuell zu überarbeitendes Kapitel: 9 (Proof of Concept)
+Dateiname aktuelles Kapitel: 009_proof_of_concept.typ
 Hinweis: Ich werde den gesamten Typst-Source als Rohtext anhängen.
       Verwende die Datei-Header der Form `// FILE: <filename>`,
       die durch die bereitgestellten Shell-Befehle eingefügt werden.
@@ -9,7 +9,7 @@ refs.yaml: wird separat hochgeladen und ist als Hayagriva-YAML-
 
 Aufgabe (kurz):
 1) Lies ALLE bereitgestellten Typst-Dateien (der gesamte Rohtext
-   mit `--- FILE: <filename> ---`-Headern) und refs.yaml vollständig,
+   mit `// FILE: <filename>`-Headern) und refs.yaml vollständig,
    um Gesamtkontext, Terminologie und Querverweise zu verstehen.
 2) Überarbeite AUSSCHLIESSLICH die Datei, die im Header unter
    "Dateiname aktuelles Kapitel" genannt ist (z. B. 01_glossar.typst).
