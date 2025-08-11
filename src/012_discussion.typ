@@ -1,5 +1,27 @@
 = Diskussion
 
-Die Vorliegende Untersuchung weist methodische limitierungen auf.
+Zum Abschluss dieser Arbeit möchte ich den gesamten Prozess und die erzielten Ergebnisse einer kritischen Reflexion unterziehen. Dieses Kapitel dient dazu, die Grenzen der Untersuchung aufzuzeigen, die getroffenen Entscheidungen zu hinterfragen und die persönlichen Lernerfahrungen, die ich im Laufe des Projekts gesammelt habe, zu beleuchten. Es ist eine ehrliche Auseinandersetzung mit den Stärken und Schwächen der Arbeit.
 
-TODO: weiterführen
+== Kritische Auseinandersetzung mit der Methodik und den Ergebnissen
+
+Obwohl die Arbeit eine durchgängige Argumentationskette von der Anforderungsanalyse bis zum Proof of Concept aufbaut, gibt es mehrere methodische Einschränkungen, die die Aussagekraft der Ergebnisse relativieren.
+
+Eine der offensichtlichsten Schwächen liegt in der empirischen Basis. Die anfängliche Umfrage zur Zielgruppe lieferte mit 35 Teilnehmenden zwar wertvolle qualitative Hinweise und bestärkte die Grundannahme des Projekts, sie ist jedoch keinesfalls repräsentativ. Ähnliches gilt für den Akzeptanztest am Ende der Arbeit. Eine Stichprobe von zehn Personen ist zu klein, um statistisch signifikante Schlussfolgerungen zu ziehen. Die Ergebnisse, insbesondere zum Spielspaß und zur Kaufbereitschaft, deuten zwar darauf hin, dass die Streaming-Lösung akzeptabel ist, können aber nicht verallgemeinert werden. Sie stellen lediglich eine erste Indikation dar.
+
+Ein weiterer kritischer Punkt ist die Testumgebung des Proof of Concept. Aus Zeitgründen wurde der Test nicht in einer echten Cloud-Umgebung auf AWS durchgeführt, sondern lokal mit einem Network Link Conditioner, der eine Netzwerklatenz von 30 ms simulierte. Mir ist bewusst, dass dies ein erheblicher Kompromiss ist. Ein lokales Setup kann die Komplexität und die potenziellen Variabilitäten des Internets und der AWS-Infrastruktur (wie Jitter oder Paketverluste) nicht vollständig abbilden. Die im Test erzielte Performance ist daher als ein Best-Case-Szenario unter kontrollierten Bedingungen zu verstehen. Ein Test auf einer echten `g5.2xlarge`-Instanz wäre aussagekräftiger gewesen und bleibt ein notwendiger nächster Schritt zur Validierung.
+
+Zudem beschränkte sich der Akzeptanztest auf ein einziges Spiel, _Cyberpunk 2077_. Die Wahl fiel auf diesen Titel, da er als grafisch anspruchsvoller AAA-Titel die Hardware stark fordert und ein vergleichsweise schnelles Gameplay bietet. Die Toleranz gegenüber Latenz und Kompressionsartefakten kann sich jedoch je nach Spielgenre stark unterscheiden. Bei einem schnellen Online-Shooter könnten die wahrgenommenen Nachteile des Streamings deutlich stärker ins Gewicht fallen als bei einem langsameren Rollenspiel. Die Ergebnisse sind somit nicht ohne Weiteres auf andere Spiele übertragbar.
+
+Schließlich wirft die Kostenanalyse ein kritisches Licht auf die wirtschaftliche Machbarkeit. Das anvisierte Kostenziel von 1 € pro Stunde wurde mit rund 2,06 € deutlich verfehlt. Diese Erkenntnis ist ernüchternd und stellt die Umsetzbarkeit eines rein kostenfreien Demo-Modells ernsthaft infrage. Die Analyse zeigt, dass die Kosten für GPU-beschleunigte Cloud-Instanzen und den ausgehenden Datenverkehr eine erhebliche Hürde darstellen, die ohne alternative Finanzierungsmodelle oder massive Kostensenkungen, etwa durch den Einsatz von Spot-Instanzen, kaum zu überwinden ist.
+
+== Reflexion des Arbeitsprozesses
+
+Der Weg zur finalen Architektur war nicht geradlinig, was sich als eine der wichtigsten Lernerfahrungen herausstellte. Mein ursprünglicher Ansatz basierte auf der Hypothese, eine monolithische Architektur sei für diesen Anwendungsfall ausreichend. Ich investierte einige Zeit in die Recherche von Virtualisierungstechnologien, nur um festzustellen, dass die fundamentale Annahme (die effiziente Aufteilung einer einzelnen GPU auf mehrere High-End-Spielinstanzen) technisch nicht haltbar ist.
+
+Diesen Ansatz verwerfen zu müssen, war nicht frustrierend, das ist in der explorativen Softwareentwicklung normal. Es wurde deutlich, wie wichtig es ist, grundlegende Hypothesen früh und konsequent zu validieren und bereit zu sein, bereits geleistete Arbeit zu verwerfen, wenn sie sich als Irrweg herausstellt. Diese Fähigkeit zur strategischen Neuausrichtung, weg vom Monolithen und hin zum Serverless-Modell, sehe ich als eine Stärke des Projekts und meines persönlichen Arbeitsprozesses.
+
+Gegen Ende des Projekts wurde die Zeit zu einem limitierenden Faktor. Der ursprüngliche Plan sah vor, den Proof of Concept nicht nur auf AWS zu deployen, sondern auch einen Windows-basierten Streaming-Server zu implementieren. Die Komplexität, GStreamer mit allen notwendigen Abhängigkeiten für Windows zu kompilieren, erwies sich jedoch als weitaus größer als erwartet. Nach mehreren gescheiterten Versuchen musste ich diese Idee aus Zeitgründen aufgeben und mich auf die Implementierung für macOS konzentrieren, was ohne Probleme funktioniert hat.
+
+Die Entscheidung, den finalen Test lokal durchzuführen, war ebenfalls eine pragmatische Konsequenz des knappen Zeitbudgets. Mir war bewusst, dass ein Test auf AWS die validere Methode gewesen wäre. Ich habe jedoch mein Bestes getan, die lokalen Testbedingungen durch die Simulation der Netzwerklatenz so nah wie möglich an ein realistisches Cloud-Szenario anzunähern, um dennoch aussagekräftige Ergebnisse für die Nutzerakzeptanz zu erhalten.
+
+Zusammenfassend lässt sich sagen, dass diese Arbeit eine detaillierte technische und konzeptionelle Grundlage für eine Cloud-Gaming-Plattform für Demos geschaffen hat. Sie hat sowohl das technische Potenzial als auch die erheblichen wirtschaftlichen Herausforderungen aufgezeigt. Der Prozess war geprägt von einer wichtigen strategischen Kurskorrektur und pragmatischen Entscheidungen, die durch die realen Beschränkungen eines zeitlich begrenzten Projekts erzwungen wurden.
