@@ -43,14 +43,14 @@ Die Veröffentlichung einer populären Spieledemo kann zu plötzlichen und massi
 #figure(
   image("img/steam_players_stellarblade_demo.svg"),
   caption: [
-    _Stellar Blade_ Demo – Gleichzeitig aktive Spieler auf Steam
+    _Stellar Blade_ Demo - Gleichzeitig aktive Spieler auf Steam
     @steamdb-2025-stellar-blade-charts
   ],
 )
 
 == Kosten pro Nutzer
 
-Ein zentraler Aspekt für die Wirtschaftlichkeit ist die Kontrolle der Kosten pro Nutzer. Da das anvisierte Geschäftsmodell auf kostenfreien Demos beruht, findet keine direkte Monetarisierung der Spielzeit statt. Die Rentabilität der Plattform hängt somit von nachgelagerten Konversionen ab – also dem Kauf der Vollversion durch Spieler, die von der Demo überzeugt wurden. Dies erfordert eine strikte Kontrolle der laufenden Betriebskosten.
+Ein zentraler Aspekt für die Wirtschaftlichkeit ist die Kontrolle der Kosten pro Nutzer. Da das anvisierte Geschäftsmodell auf kostenfreien Demos beruht, findet keine direkte Monetarisierung der Spielzeit statt. Die Rentabilität der Plattform hängt somit von nachgelagerten Konversionen ab, also dem Kauf der Vollversion durch Spieler, die von der Demo überzeugt wurden. Dies erfordert eine strikte Kontrolle der laufenden Betriebskosten.
 
 Für die später folgende Machbarkeitsanalyse wird eine Zielgröße für die Betriebskosten von 1 € pro Stunde und Spieler als Referenzwert definiert. Eine detaillierte Wirtschaftlichkeitsberechnung durch den Betreiber müsste weitere Faktoren wie die erwartete Anzahl an Demo-Nutzern, die Konversionsrate zum Kauf der Vollversion sowie eventuelle Lizenzkosten miteinbeziehen.
 

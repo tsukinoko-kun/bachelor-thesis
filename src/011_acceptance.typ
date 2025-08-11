@@ -147,7 +147,7 @@ Dieses Bild bestätigt sich bei der Frage, ob die Teilnehmenden nach dem Abschni
 
 Die Ergebnisse des Akzeptanztests zeichnen ein differenziertes Bild. Einerseits führt die Streaming-Lösung zu objektiv messbaren und subjektiv wahrgenommenen Einbußen bei der Leistung, der Eingabeverzögerung und der Bildqualität. Diese Nachteile waren aufgrund der technischen Gegebenheiten zu erwarten.
 
-Andererseits deuten die zentralen Metriken für die Nutzererfahrung – der Spielspaß und die Bereitschaft, weiterzuspielen – darauf hin, dass diese Einbußen das Gesamterlebnis nicht entscheidend beeinträchtigen. Für den Anwendungsfall einer kurzen Spieledemo scheint die erreichte Qualität "gut genug" zu sein, um einen positiven Eindruck des Spiels zu vermitteln.
+Andererseits deuten die zentralen Metriken für die Nutzererfahrung (der Spielspaß und die Bereitschaft, weiterzuspielen) darauf hin, dass diese Einbußen das Gesamterlebnis nicht entscheidend beeinträchtigen. Für den Anwendungsfall einer kurzen Spieledemo scheint die erreichte Qualität "gut genug" zu sein, um einen positiven Eindruck des Spiels zu vermitteln.
 
 Das unerwartete Ergebnis bei der Kaufwahrscheinlichkeit lässt sich angesichts der geringen Teilnehmerzahl und der zufälligen Elemente im Spielgeschehen am ehesten als statistisches Rauschen interpretieren und besitzt keine Aussagekraft.
 

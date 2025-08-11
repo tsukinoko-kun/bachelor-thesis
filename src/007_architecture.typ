@@ -21,13 +21,13 @@ Das Verbindungsproblem lässt sich durch einen Polling-Mechanismus lösen. Das F
 
 Die Lösung für die Bereitstellung des Images ist mehrschichtig. Es muss ein Mechanismus etabliert werden, der für jedes Spiel ein spezifisches, vorkonfiguriertes AMI bereithält. Zur Zuordnung von Spiel zu AMI eignet sich ein Key-Value-Store wie Amazon DynamoDB. In diesem wird der eindeutige Name des Spiels als Schlüssel (Key) und die zugehörige AMI-ID als Wert (Value) gespeichert.
 
-Die Erstellung der AMIs selbst wird durch den EC2 Image Builder automatisiert. Dieser Dienst startet eine temporäre EC2-Instanz und führt darauf ein Konfigurationsskript aus, das die erforderliche Software – die Streaming-Anwendung und das eigentliche Spiel – installiert. Während die Streaming-Software aus diversen Quellen wie Paketmanagern oder einem S3-Bucket bezogen werden kann, stellt die Distribution des Spiels aufgrund seiner erheblichen Dateigröße eine Herausforderung dar. Amazon S3 ist hierfür die geeignete Lösung, da der Dienst für die Speicherung und den Abruf großer Datenmengen optimiert ist. @abiodundesign
+Die Erstellung der AMIs selbst wird durch den EC2 Image Builder automatisiert. Dieser Dienst startet eine temporäre EC2-Instanz und führt darauf ein Konfigurationsskript aus, das die erforderliche Software (die Streaming-Anwendung und das eigentliche Spiel) installiert. Während die Streaming-Software aus diversen Quellen wie Paketmanagern oder einem S3-Bucket bezogen werden kann, stellt die Distribution des Spiels aufgrund seiner erheblichen Dateigröße eine Herausforderung dar. Amazon S3 ist hierfür die geeignete Lösung, da der Dienst für die Speicherung und den Abruf großer Datenmengen optimiert ist. @abiodundesign
 
 Der gesamte Prozess wird idealerweise durch eine CI/CD-Pipeline angestoßen: Ein Spielentwickler lädt die Spieldateien in einen S3-Bucket hoch, was via Amazon EventBridge automatisch den Image-Builder-Prozess auslöst.
 
 == C4-Modell: Systemkontext und Container
 
-Die nachfolgenden Diagramme visualisieren die Architektur nach dem C4-Modell. Der Systemkontext zeigt die Interaktion der beiden primären Akteure – Spielentwickler und Spieler – mit der Plattform.
+Die nachfolgenden Diagramme visualisieren die Architektur nach dem C4-Modell. Der Systemkontext zeigt die Interaktion der beiden primären Akteure (Spielentwickler und Spieler) mit der Plattform.
 
 #figure(image("img/c1.jpg"), caption: "C4-Modell: Systemkontext (C1)")
 
