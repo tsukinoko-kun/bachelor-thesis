@@ -45,7 +45,7 @@ Nach jedem der beiden Abschnitte wurden die Teilnehmenden gebeten, ihre Erfahrun
 
 == Auswertung der Ergebnisse
 
-Die erhobenen Daten wurden mittels Boxplots visualisiert, um die Verteilung der Bewertungen für das lokale und das gestreamte Spielerlebnis zu vergleichen.
+Die erhobenen Daten wurden mittels Boxplots visualisiert, um die Verteilung der Bewertungen für das lokale (links) und das gestreamte (rechts) Spielerlebnis zu vergleichen.
 
 #import "@preview/lilaq:0.4.0" as lq
 
