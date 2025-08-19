@@ -154,6 +154,7 @@
 #emph(text(weight: "bold")[Abstract -])
 #text(weight: "bold")[#include "src/abstract.typ"]
 
+#include "./src/000_intro.typ"
 #include "./src/001_naming.typ"
 #include "./src/002_questions.typ"
 #include "./src/003_methods.typ"

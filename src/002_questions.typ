@@ -1,14 +1,3 @@
-Demos sind im Gaming-Markt eine relevante Möglichkeit,
-Spieler vom Kauf eines Videospiels zu überzeugen. @steamdb-2025-stellar-blade-charts
-Diese Arbeit beschäftigt sich mit der Möglichkeit,
-Demos von Videospielen mit der modernen Technologie der Cloud-Gaming zu verbinden.
-
-Sowohl Demos, als auch Cloud-Gaming stehen für Zugänglichkeit.
-Beide haben aber unterschiedliche Ziele.
-Demos sind Marketing und wollen etwas verkaufen.
-Cloud-Gaming ist ein Produkt, das unabhängig von Videospielen verkauft wird.
-In dieser Arbeit wird also untersucht, ob sich diese Ziele zusammenführen lassen.
-
 = Forschungsfragen
 
 Den Ausgangspunkt dieser Arbeit bildet die Untersuchung der konzeptionellen und technischen Machbarkeit einer spezialisierten Cloud-Gaming-Plattform für Spieledemos. Aus dieser übergreifenden Zielsetzung leitet sich die folgende Hauptforschungsfrage (HFF) ab:
