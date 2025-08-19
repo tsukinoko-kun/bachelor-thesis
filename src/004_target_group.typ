@@ -1,10 +1,10 @@
 = Zielgruppe
 
-Die Entwicklung einer erfolgreichen Technologieplattform setzt ein tiefes Verständnis der potenziellen Nutzer voraus. Dieses Kapitel widmet sich daher der Definition und Analyse der Zielgruppe für die konzipierte Cloud-Gaming-Lösung. Um ein empirisches Fundament für die nutzerzentrierte Auslegung der Systemarchitektur zu schaffen, wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von High-End-Spielen kostenfrei über eine Cloud-Plattform zu nutzen, anstatt sie lokal installieren zu müssen.
+Die Entwicklung einer erfolgreichen Technologieplattform setzt ein Verständnis der potenziellen Nutzer voraus. Dieses Kapitel widmet sich daher der Definition und Analyse der Zielgruppe für die konzipierte Cloud-Gaming-Lösung. Um ein empirisches Fundament für die nutzerzentrierte Auslegung der Systemarchitektur zu schaffen, wurde eine Umfrage unter Videospiel-Enthusiasten durchgeführt. Den Teilnehmenden wurde das Konzept vorgestellt, Demos von High-End-Spielen kostenfrei über eine Cloud-Plattform zu nutzen, anstatt sie lokal installieren zu müssen.
 
 Die Stichprobe umfasste 35 Personen, mehrheitlich aus Deutschland (32) und ergänzt durch Teilnehmer aus den USA (3). Die Teilnahme erfolgte freiwillig über das Online-Tool Blocksurvey. Die Gruppe setzte sich primär aus Studierenden des Software-Engineerings sowie weiteren Personen unterschiedlicher Berufs- und Altersgruppen zusammen. Es ist anzumerken, dass diese Stichprobengröße keine repräsentative Aussage für die gesamte Spielerschaft zulässt. Die Ergebnisse liefern jedoch wertvolle qualitative Einblicke und deuten auf Tendenzen innerhalb einer technikaffinen Nutzergruppe hin.
 
-Die Umfrageergebnisse zeichnen ein klares Bild der Spielgewohnheiten. Mit 80 % der Befragten, die vorwiegend einen Desktop-PC als Spielplattform nutzen, verortet sich die Zielgruppe klar im Segment der anspruchsvollen PC-Spieler.
+Die Umfrageergebnisse zeichnen ein klares Bild der Spielgewohnheiten. Mit 80 % der Befragten, die vorwiegend einen Desktop-PC als Spielplattform nutzen, verortet sich die Zielgruppe klar im Segment der PC-Spieler.
 
 #figure(
   image("img/survey_devices.png"),

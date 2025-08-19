@@ -2,6 +2,14 @@
 
 Zur Validierung des im vorherigen Kapitel konzipierten Streaming-Dienstes wurde ein Proof of Concept (PoC) implementiert. Dieses Kapitel dokumentiert die technische Umsetzung der Kernkomponenten, die für eine latenzarme Übertragung des Spielgeschehens verantwortlich sind. Der Fokus liegt dabei auf der Auswahl des Media-Frameworks, der plattformspezifischen Konfiguration der Video-Pipeline und der Übertragung von Steuerungseingaben.
 
+#let anchor(dest, label) = {
+  text(fill: blue)[#link(dest)[#emph(underline(label))]]
+}
+
+Source Code: #anchor("https://gitlab.com/tsukinoko-kun/bachelor-thesis-poc", [gitlab.com/tsukinoko-kun/bachelor-thesis-poc])
+
+Mirror: #anchor("https://github.com/tsukinoko-kun/bachelor-thesis-poc", [github.com/tsukinoko-kun/bachelor-thesis-poc])
+
 == Videoaufzeichnung und Stream-Kodierung
 
 Eine zentrale Anforderung ist die Fähigkeit, den Bildschirminhalt oder ein spezifisches Anwendungsfenster mitsamt Ton zuverlässig aufzuzeichnen und für das Streaming zu kodieren. Zwei etablierte Open-Source-Frameworks kommen für diese Aufgabe infrage: #link("https://ffmpeg.org/")[FFmpeg] und #link("https://gstreamer.freedesktop.org/")[GStreamer].
